@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/lightBlue">
+
+	<TextView
+		android:id="@+id/listQuizTitle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/quizTitle"
+		android:layout_marginStart="5dp"
+		android:layout_marginTop="5dp"
+		style="@style/stdTextStyle"/>
+
+	<TextView
+		android:id="@+id/listQuizByQuestions"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/quizBy"
+		android:layout_below="@id/listQuizTitle"
+		android:layout_marginStart="5dp"
+		android:layout_marginTop="5dp"
+		android:textSize="@dimen/smallFont"
+		style="@style/stdTextStyle"/>
+
+</RelativeLayout>

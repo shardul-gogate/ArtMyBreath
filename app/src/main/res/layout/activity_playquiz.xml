@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/yellow"
+	tools:context=".PlayQuizActivity">
+
+	<TextView
+		android:id="@+id/playQuizQuestion"
+		android:layout_width="match_parent"
+		android:textAlignment="center"
+		android:background="@color/darkPurple"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		android:layout_marginTop="100dp"
+		android:textSize="@dimen/largerFont"
+		android:text="@string/questionTitle"
+		android:textColor="@color/white"
+		style="@style/stdTextStyle"/>
+
+	<RadioGroup
+		android:id="@+id/quizAnswersRadioGroup"
+		app:layout_constraintTop_toBottomOf="@id/playQuizQuestion"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		android:layout_marginTop="35dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<RadioButton
+			android:id="@+id/answerOneRadio"
+			android:layout_gravity="center"
+			android:text="@string/choiceOne"
+			style="@style/stdRadioButton"/>
+
+		<RadioButton
+			android:id="@+id/answerTwoRadio"
+			android:layout_gravity="center"
+			android:layout_marginTop="15dp"
+			android:text="@string/choiceTwo"
+			style="@style/stdRadioButton"/>
+
+		<RadioButton
+			android:id="@+id/answerThreeRadio"
+			android:layout_gravity="center"
+			android:layout_marginTop="15dp"
+			android:text="@string/choiceThree"
+			style="@style/stdRadioButton"/>
+
+		<RadioButton
+			android:id="@+id/answerFourRadio"
+			android:layout_gravity="center"
+			android:layout_marginTop="15dp"
+			android:text="@string/choiceFour"
+			style="@style/stdRadioButton"/>
+
+	</RadioGroup>
+
+	<Button
+		android:id="@+id/submitAnswer"
+		app:layout_constraintTop_toBottomOf="@id/quizAnswersRadioGroup"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		android:layout_marginTop="50dp"
+		android:layout_width="300dp"
+		android:backgroundTint="@color/darkGray"
+		android:textColor="@color/white"
+		android:textStyle="bold"
+		android:text="@string/submitAnswer"
+		style="@style/stdButton"/>
+
+	<ProgressBar
+		android:id="@+id/quizProgressBar"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		android:indeterminateTint="@color/darkPurple"
+		android:layout_width="150dp"
+		android:layout_height="150dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
