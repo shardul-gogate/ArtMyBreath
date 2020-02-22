@@ -52,6 +52,16 @@ class RegisterActivity : AppCompatActivity() {
 			return
 		}
 
+		if(phoneNumber.length!=10) {
+			make(
+				registerActivityLayout,
+				"Phone number has to be 10 digits long",
+				LENGTH_LONG
+			).show()
+			hideProgressBar()
+			return
+		}
+
 		firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
 			if (it.isSuccessful) {
 				val currentUser= firebaseAuth.currentUser ?: return@addOnCompleteListener
@@ -62,19 +72,21 @@ class RegisterActivity : AppCompatActivity() {
 				profileMap.put(EMAIL,email)
 				profileMap.put(PHONE_NUMBER,phoneNumber)
 
-				firebaseFirestore.collection(firebaseUserCollection).document(userID).set(profileMap).addOnFailureListener { e ->
+				firebaseFirestore.collection(USER_COLLECTION).document(userID).set(profileMap).addOnFailureListener { e ->
 					make(registerActivityLayout,"Sorry! There was a problem while creating your profile",LENGTH_LONG).show()
 					firebaseAuth.signOut()
 					currentUser.delete()
 				}.addOnSuccessListener {
 					Toast.makeText(this,"Account created! Welcome to Art My Breath",Toast.LENGTH_SHORT).show()
-					Intent(this,HomeScreen::class.java).also { intent -> startActivity(intent) }
+					firebaseAuth.signOut()
+					Intent(this,LoginActivity::class.java).also { intent -> startActivity(intent) }
 					hideProgressBar()
 					finish()
 				}
 			}
 			else {
 				make(registerActivityLayout,"Sorry! There was a problem while creating your account",LENGTH_LONG).show()
+				hideProgressBar()
 				return@addOnCompleteListener
 			}
 

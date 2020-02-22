@@ -12,6 +12,7 @@ class PlayQuizActivity : AppCompatActivity() {
 	private lateinit var questionCollection: CollectionReference
 
 	private val questions: ArrayList<Question> = arrayListOf()
+
 	private val questionCount: Int= selectedQuiz.questionCount
 	private var currQuestion: Int=0
 	private var selectedAnswer: Int=0

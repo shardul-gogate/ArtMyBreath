@@ -21,8 +21,6 @@ val EMAIL: String="email"
 
 val PHONE_NUMBER: String="phoneNumber"
 
-val firebaseUserCollection: String="users"
-
 val QUIZ_TITLE: String="quizTitle"
 
 val QUIZ_BY: String="quizBy"
