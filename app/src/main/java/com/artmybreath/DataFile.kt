@@ -7,6 +7,10 @@ class Quiz(val quizTitle: String, val questionCount: Int, val quizBy: String, va
 
 class Question (val questionTitle: String, val answerOne: String, val answerTwo: String, val answerThree: String, val answerFour: String, val correctAnswer: Int)
 
+class User(val firstName: String, val lastName: String)
+
+lateinit var currUser: User
+
 lateinit var firebaseAuth: FirebaseAuth
 
 lateinit var firebaseFirestore: FirebaseFirestore

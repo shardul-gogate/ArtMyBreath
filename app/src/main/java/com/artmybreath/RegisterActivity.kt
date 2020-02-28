@@ -53,11 +53,7 @@ class RegisterActivity : AppCompatActivity() {
 		}
 
 		if(phoneNumber.length!=10) {
-			make(
-				registerActivityLayout,
-				"Phone number has to be 10 digits long",
-				LENGTH_LONG
-			).show()
+			make(registerActivityLayout,"Phone number has to be 10 digits long",LENGTH_LONG).show()
 			hideProgressBar()
 			return
 		}

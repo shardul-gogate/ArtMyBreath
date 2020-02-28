@@ -18,6 +18,9 @@ class PlayQuizActivity : AppCompatActivity() {
 	private var selectedAnswer: Int=0
 	private var points: Int=0
 
+	private var wrongAnswerReview: ArrayList<String> = arrayListOf()
+	private var wrongAnswerIndex: Int=0
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_playquiz)
@@ -58,9 +61,14 @@ class PlayQuizActivity : AppCompatActivity() {
 		if(selectedAnswer==questions[currQuestion].correctAnswer) {
 			points++
 		}
+		else {
+			val wrongAnswer=getAnswerAtIndex(selectedAnswer)
+			val correctAnswer=getAnswerAtIndex(questions[currQuestion].correctAnswer)
+			wrongAnswerReview.add("Question: ${questions[currQuestion].questionTitle}\n\nYou answered: $wrongAnswer\n\nCorrect Answer: $correctAnswer\n")
+		}
 		currQuestion++
 		if(currQuestion>=questionCount) {
-			quizEndAlert()
+			quizEndDialog()
 		}
 		else {
 			playQuizQuestion.text=questions[currQuestion].questionTitle
@@ -74,13 +82,35 @@ class PlayQuizActivity : AppCompatActivity() {
 		}
 	}
 
-	private fun quizEndAlert() {
+	private fun quizEndDialog() {
+		val reviewAnswers: AlertDialog.Builder=AlertDialog.Builder(this)
+		reviewAnswers.setTitle("Reviewing incorrect answers")
+		reviewAnswers.setCancelable(false)
+		reviewAnswers.setNeutralButton("Next"){ _,_ ->
+			if(wrongAnswerIndex<wrongAnswerReview.size) {
+				reviewAnswers.setMessage(wrongAnswerReview[wrongAnswerIndex])
+				reviewAnswers.show()
+				wrongAnswerIndex++
+			}
+			else
+				finish()
+		}
+
 		val endQuiz: AlertDialog.Builder=AlertDialog.Builder(this)
 		endQuiz.setTitle("End of quiz")
 		endQuiz.setMessage("Quiz has ended. You scored $points / $questionCount")
 		endQuiz.setCancelable(false)
-		endQuiz.setNeutralButton("Ok") { _,_ ->
+		endQuiz.setNegativeButton("Exit"){ _,_ ->
 			finish()
+		}
+		endQuiz.setPositiveButton("Review incorrect answers"){ _,_ ->
+			if(wrongAnswerIndex<wrongAnswerReview.size) {
+				reviewAnswers.setMessage(wrongAnswerReview[wrongAnswerIndex])
+				reviewAnswers.show()
+				wrongAnswerIndex++
+			}
+			else
+				finish()
 		}
 		endQuiz.show()
 	}
@@ -119,5 +149,13 @@ class PlayQuizActivity : AppCompatActivity() {
 		answerTwoRadio.isChecked=false
 		answerThreeRadio.isChecked=false
 		answerFourRadio.isChecked=false
+	}
+
+	private fun getAnswerAtIndex(index: Int): String = when(index) {
+		1 -> questions[currQuestion].answerOne
+		2 -> questions[currQuestion].answerTwo
+		3 -> questions[currQuestion].answerThree
+		4 -> questions[currQuestion].answerFour
+		else -> "ANSWER_ERROR"
 	}
 }

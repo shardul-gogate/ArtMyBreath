@@ -31,10 +31,19 @@
 	<string name="quizBy">Quiz By</string>
 	<string name="questionCount">Questions</string>
 	<string name="submitAnswer">Submit and Next</string>
+	<string name="quiz">Quiz</string>
+	<string name="navigationDrawerOpen">Drawer open</string>
+	<string name="navigationDrawerClose">Drawer close</string>
+	<string name="settings">Settings</string>
+	<string name="artEvents">Art Events</string>
+	<string name="artBlog">Art Blog</string>
+	<string name="artJobs">Art Jobs</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>
 	<dimen name="largerFont">36sp</dimen>
 	<dimen name="largestFont">40sp</dimen>
 	<dimen name="standardButton">30dp</dimen>
+
+	<string name="testText">Hello and welcome to Art My Breath\nThis application is undergoing\ndevelopment. Please swipe from the\nleft side of the screen to begin"</string>
 </resources>
