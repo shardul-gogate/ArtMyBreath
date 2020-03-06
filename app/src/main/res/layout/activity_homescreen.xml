@@ -16,8 +16,8 @@
 		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/homeScreenToolbar"
 			android:layout_width="match_parent"
+			android:elevation="7dp"
 			android:layout_height="?attr/actionBarSize"
-			android:elevation="4dp"
 			android:background="@color/red"
 			android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
 			app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>

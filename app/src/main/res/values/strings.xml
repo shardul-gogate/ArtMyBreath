@@ -38,6 +38,8 @@
 	<string name="artEvents">Art Events</string>
 	<string name="artBlog">Art Blog</string>
 	<string name="artJobs">Art Jobs</string>
+	<string name="anonLogin"><u>Continue anonymously</u></string>
+	<string name="loading">Loading . . . </string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

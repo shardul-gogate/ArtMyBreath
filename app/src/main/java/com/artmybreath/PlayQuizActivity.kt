@@ -11,6 +11,8 @@ class PlayQuizActivity : AppCompatActivity() {
 
 	private lateinit var questionCollection: CollectionReference
 
+	private lateinit var loadingAlertDialog: AlertDialog
+
 	private val questions: ArrayList<Question> = arrayListOf()
 
 	private val questionCount: Int= selectedQuiz.questionCount
@@ -25,9 +27,11 @@ class PlayQuizActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_playquiz)
 
-		showProgressBar()
+		createLoadingAlert()
 
-		questionCollection= firebaseFirestore.collection(QUIZ_COLLECTION).document(selectedQuiz.quizID).collection(QUESTIONS_COLLECTION)
+		showLoadingAlert()
+
+		questionCollection= QUIZ_COLLECTION_REFERENCE.document(selectedQuiz.quizID).collection(QUESTIONS_COLLECTION)
 
 		getAllQuestions()
 
@@ -51,7 +55,7 @@ class PlayQuizActivity : AppCompatActivity() {
 				val newQuestion=Question(questionTitle,answerOne,answerTwo,answerThree,answerFour,correctAnswer.toInt())
 				questions.add(newQuestion)
 			}
-			hideProgressBar()
+			hideLoadingAlert()
 			showFirstQuestion()
 		}
 	}
@@ -115,24 +119,31 @@ class PlayQuizActivity : AppCompatActivity() {
 		endQuiz.show()
 	}
 
-	private fun showProgressBar() {
+	private fun createLoadingAlert() {
+		loadingAlertDialog = AlertDialog.Builder(this).create()
+		loadingAlertDialog.setTitle("")
+		val alertLayout: View=layoutInflater.inflate(R.layout.layout_loadingalert,null)
+		loadingAlertDialog.setView(alertLayout)
+	}
+
+	private fun showLoadingAlert() {
 		playQuizQuestion.visibility= View.GONE
 		quizAnswersRadioGroup.visibility= View.GONE
 		submitAnswer.visibility= View.GONE
-		quizProgressBar.visibility= View.VISIBLE
+		loadingAlertDialog.show()
 	}
 
-	private fun hideProgressBar() {
+	private fun hideLoadingAlert() {
 		playQuizQuestion.visibility= View.VISIBLE
 		quizAnswersRadioGroup.visibility= View.VISIBLE
 		submitAnswer.visibility= View.VISIBLE
-		quizProgressBar.visibility= View.GONE
+		loadingAlertDialog.dismiss()
 	}
 
 	private fun setRadioListeners() {
 		answerOneRadio.setOnClickListener{ selectedAnswer=1 }
 		answerTwoRadio.setOnClickListener{ selectedAnswer=2 }
-		answerThreeRadio.setOnClickListener{ selectedAnswer=3 }
+		answerThreeRadio.setOnClickListener{ selectedAnswer= 3 }
 		answerFourRadio.setOnClickListener{ selectedAnswer=4 }
 	}
 

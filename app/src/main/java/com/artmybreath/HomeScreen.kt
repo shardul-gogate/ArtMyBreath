@@ -33,7 +33,7 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun getCurrentUserInfo() {
-		firebaseFirestore.collection(USER_COLLECTION).document(firebaseAuth.currentUser!!.uid).get().addOnCompleteListener {
+		USER_COLLECTION_REFERENCE.document(firebaseAuth.currentUser!!.uid).get().addOnCompleteListener {
 			if(it.isSuccessful) {
 				val userDoc=it.result
 				if(userDoc!=null) {

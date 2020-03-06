@@ -27,7 +27,6 @@ class CreateQuizActivity : AppCompatActivity() {
 
 	private var correctAnswer: Int=0
 	private var questionCount: Int=0
-	private lateinit var quizCollection: CollectionReference
 	private lateinit var quizReference: DocumentReference
 	private lateinit var questionCollection: CollectionReference
 
@@ -37,8 +36,6 @@ class CreateQuizActivity : AppCompatActivity() {
 
 		whiteColor=ContextCompat.getColor(this,R.color.white)
 		blackColor=ContextCompat.getColor(this,R.color.black)
-
-		quizCollection=firebaseFirestore.collection(QUIZ_COLLECTION)
 
 		quizTitleVisibility()
 
@@ -92,7 +89,7 @@ class CreateQuizActivity : AppCompatActivity() {
 
 		val userIDForQuiz: String= firebaseAuth.currentUser!!.uid
 
-		quizReference=quizCollection.document()
+		quizReference= QUIZ_COLLECTION_REFERENCE.document()
 		quizReference.set(
 			hashMapOf(
 				QUIZ_TITLE to quizTitle,
@@ -184,6 +181,14 @@ class CreateQuizActivity : AppCompatActivity() {
 		exitAlert.setTitle("Confirm exit")
 		exitAlert.setMessage("Do you surely want to quit? This will erase the quiz")
 		exitAlert.setPositiveButton("Yes"){ _,_ ->
+			quizReference.delete().addOnCompleteListener{
+				if(it.isSuccessful) {
+					Toast.makeText(this,"Quiz creation exited and quiz deleted",Toast.LENGTH_SHORT).show()
+				}
+				else {
+					Toast.makeText(this,"Failed to delete quiz",Toast.LENGTH_SHORT).show()
+				}
+			}
 			finish()
 		}
 		exitAlert.setNegativeButton("No") { _,_ -> }

@@ -75,16 +75,7 @@
 		app:layout_constraintRight_toRightOf="parent"
 		android:layout_marginTop="50dp"
 		android:text="@string/register"
+		android:elevation="7dp"
 		style="@style/userAuthButton"/>
-
-	<ProgressBar
-		android:id="@+id/registerProgressBar"
-		app:layout_constraintTop_toBottomOf="@id/registerButton"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		android:indeterminateTint="@color/yellow"
-		android:layout_marginTop="30dp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

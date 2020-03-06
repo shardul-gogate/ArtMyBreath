@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlin.collections.HashMap
@@ -12,12 +13,15 @@ import kotlin.collections.HashMap
 class RegisterActivity : AppCompatActivity() {
 	private lateinit var profileMap: HashMap<String, Any>
 	private lateinit var userID: String
+	private lateinit var loadingAlertDialog: AlertDialog
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_register)
 
-		registerProgressBar.visibility= View.GONE
+		createLoadingAlert()
+
+		hideLoadingAlert()
 
 		registerButton.setOnClickListener {
 			registerUser()
@@ -25,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
 	}
 
 	private fun registerUser() {
-		showProgressBar()
+		showLoadingAlert()
 
 		val firstName=firstNameField.text.toString()
 		val lastName=lastNameField.text.toString()
@@ -36,25 +40,25 @@ class RegisterActivity : AppCompatActivity() {
 
 		if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 			make(registerActivityLayout,"Fill all the details", LENGTH_LONG).show()
-			hideProgressBar()
+			hideLoadingAlert()
 			return
 		}
 
 		if(password != confirmPassword) {
 			make(registerActivityLayout,"Passwords do not match", LENGTH_LONG).show()
-			hideProgressBar()
+			hideLoadingAlert()
 			return
 		}
 
 		if(password.length<6) {
 			make(registerActivityLayout,"Password must be at-least 6 characters in length", LENGTH_LONG).show()
-			hideProgressBar()
+			hideLoadingAlert()
 			return
 		}
 
 		if(phoneNumber.length!=10) {
 			make(registerActivityLayout,"Phone number has to be 10 digits long",LENGTH_LONG).show()
-			hideProgressBar()
+			hideLoadingAlert()
 			return
 		}
 
@@ -68,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
 				profileMap.put(EMAIL,email)
 				profileMap.put(PHONE_NUMBER,phoneNumber)
 
-				firebaseFirestore.collection(USER_COLLECTION).document(userID).set(profileMap).addOnFailureListener { e ->
+				USER_COLLECTION_REFERENCE.document(userID).set(profileMap).addOnFailureListener { e ->
 					make(registerActivityLayout,"Sorry! There was a problem while creating your profile",LENGTH_LONG).show()
 					firebaseAuth.signOut()
 					currentUser.delete()
@@ -76,25 +80,33 @@ class RegisterActivity : AppCompatActivity() {
 					Toast.makeText(this,"Account created! Welcome to Art My Breath",Toast.LENGTH_SHORT).show()
 					firebaseAuth.signOut()
 					Intent(this,LoginActivity::class.java).also { intent -> startActivity(intent) }
-					hideProgressBar()
+					hideLoadingAlert()
 					finish()
 				}
 			}
 			else {
 				make(registerActivityLayout,"Sorry! There was a problem while creating your account",LENGTH_LONG).show()
-				hideProgressBar()
+				hideLoadingAlert()
 				return@addOnCompleteListener
 			}
 
-			hideProgressBar()
+			hideLoadingAlert()
 		}
 	}
 
-	private fun showProgressBar() {
-		registerProgressBar.visibility= View.VISIBLE
+	private fun createLoadingAlert() {
+		loadingAlertDialog = AlertDialog.Builder(this).create()
+		loadingAlertDialog.setTitle("")
+		val alertLayout: View=layoutInflater.inflate(R.layout.layout_loadingalert,null)
+		loadingAlertDialog.setTitle("")
+		loadingAlertDialog.setView(alertLayout)
 	}
 
-	private fun hideProgressBar() {
-		registerProgressBar.visibility= View.GONE
+	private fun showLoadingAlert() {
+		loadingAlertDialog.show()
+	}
+
+	private fun hideLoadingAlert() {
+		loadingAlertDialog.dismiss()
 	}
 }

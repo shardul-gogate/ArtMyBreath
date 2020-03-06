@@ -43,7 +43,7 @@ class QuizListActivity : Activity(), AdapterView.OnItemClickListener {
 				val questionCount=quizMap[QUESTION_COUNT] as Long
 				val userID=quizMap[QUIZ_BY] as String
 
-				firebaseFirestore.collection(USER_COLLECTION).document(userID).get().addOnCompleteListener { userInfo ->
+				USER_COLLECTION_REFERENCE.document(userID).get().addOnCompleteListener { userInfo ->
 					if(userInfo.isSuccessful) {
 						val userDoc=userInfo.result
 						if(userDoc==null) {

@@ -70,16 +70,7 @@
 		android:textColor="@color/white"
 		android:textStyle="bold"
 		android:text="@string/submitAnswer"
+		android:elevation="7dp"
 		style="@style/stdButton"/>
-
-	<ProgressBar
-		android:id="@+id/quizProgressBar"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		android:indeterminateTint="@color/darkPurple"
-		android:layout_width="150dp"
-		android:layout_height="150dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.artmybreath
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Quiz(val quizTitle: String, val questionCount: Int, val quizBy: String, val quizID: String)
@@ -11,42 +12,46 @@ class User(val firstName: String, val lastName: String)
 
 lateinit var currUser: User
 
-lateinit var firebaseAuth: FirebaseAuth
+val firebaseAuth: FirebaseAuth=FirebaseAuth.getInstance()
 
-lateinit var firebaseFirestore: FirebaseFirestore
+val firebaseFirestore: FirebaseFirestore=FirebaseFirestore.getInstance()
 
 lateinit var selectedQuiz: Quiz
 
-val FIRST_NAME: String="firstName"
+const val FIRST_NAME: String="firstName"
 
-val LAST_NAME: String="lastName"
+const val LAST_NAME: String="lastName"
 
-val EMAIL: String="email"
+const val EMAIL: String="email"
 
-val PHONE_NUMBER: String="phoneNumber"
+const val PHONE_NUMBER: String="phoneNumber"
 
-val QUIZ_TITLE: String="quizTitle"
+const val QUIZ_TITLE: String="quizTitle"
 
-val QUIZ_BY: String="quizBy"
+const val QUIZ_BY: String="quizBy"
 
-val QUESTION: String="question"
+const val QUESTION: String="question"
 
-val QUESTION_TITLE: String="questionTitle"
+const val QUESTION_TITLE: String="questionTitle"
 
-val ANSWER_ONE: String="answerOne"
+const val ANSWER_ONE: String="answerOne"
 
-val ANSWER_TWO: String="answerTwo"
+const val ANSWER_TWO: String="answerTwo"
 
-val ANSWER_THREE: String="answerThree"
+const val ANSWER_THREE: String="answerThree"
 
-val ANSWER_FOUR: String="answerFour"
+const val ANSWER_FOUR: String="answerFour"
 
-val CORRECT_ANSWER: String="correctAns"
+const val CORRECT_ANSWER: String="correctAns"
 
-val QUESTION_COUNT: String="questionCount"
+const val QUESTION_COUNT: String="questionCount"
 
-val QUIZ_COLLECTION: String="quiz"
+const val QUIZ_COLLECTION: String="quiz"
 
-val QUESTIONS_COLLECTION: String="questions"
+const val QUESTIONS_COLLECTION: String="questions"
 
-val USER_COLLECTION: String="users"
+const val USER_COLLECTION: String="users"
+
+val QUIZ_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(QUIZ_COLLECTION)
+
+val USER_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(USER_COLLECTION)
