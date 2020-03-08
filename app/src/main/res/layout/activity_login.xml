@@ -54,8 +54,6 @@
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
 		android:layout_marginTop="30dp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
 		android:text="@string/memberSignUp"
 		android:textColor="@color/white"
 		android:textSize="@dimen/smallFont"
@@ -63,9 +61,13 @@
 
 	<TextView
 		android:id="@+id/anonymousLogin"
+		app:layout_constraintTop_toBottomOf="@id/memberSignUpLabel"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
+		android:layout_marginTop="30dp"
+		android:textColor="@color/white"
+		android:textSize="@dimen/smallFont"
+		android:text="@string/anonLogin"
+		style="@style/stdTextStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

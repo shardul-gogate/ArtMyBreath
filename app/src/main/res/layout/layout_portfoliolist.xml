@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<TextView
+		android:id="@+id/portfolioCategory"
+		android:text="@string/category"
+		android:textSize="@dimen/largeFont"
+		android:layout_marginTop="5dp"
+		android:layout_marginLeft="15dp"
+		style="@style/stdTextStyle"/>
+
+	<TextView
+		android:id="@+id/portfolioSubcategory"
+		android:text="@string/subCategory"
+		android:textSize="@dimen/standardFont"
+		android:layout_below="@id/portfolioCategory"
+		android:layout_marginLeft="15dp"
+		style="@style/stdTextStyle"/>
+
+
+</RelativeLayout>

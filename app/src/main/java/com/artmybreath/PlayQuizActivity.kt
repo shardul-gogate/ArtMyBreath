@@ -104,17 +104,19 @@ class PlayQuizActivity : AppCompatActivity() {
 		endQuiz.setTitle("End of quiz")
 		endQuiz.setMessage("Quiz has ended. You scored $points / $questionCount")
 		endQuiz.setCancelable(false)
-		endQuiz.setNegativeButton("Exit"){ _,_ ->
+		endQuiz.setNeutralButton("Exit"){ _,_ ->
 			finish()
 		}
-		endQuiz.setPositiveButton("Review incorrect answers"){ _,_ ->
-			if(wrongAnswerIndex<wrongAnswerReview.size) {
-				reviewAnswers.setMessage(wrongAnswerReview[wrongAnswerIndex])
-				reviewAnswers.show()
-				wrongAnswerIndex++
+		if(!firebaseAuth.currentUser!!.isAnonymous) {
+			endQuiz.setPositiveButton("Review incorrect answers"){ _,_ ->
+				if(wrongAnswerIndex<wrongAnswerReview.size) {
+					reviewAnswers.setMessage(wrongAnswerReview[wrongAnswerIndex])
+					reviewAnswers.show()
+					wrongAnswerIndex++
+				}
+				else
+					finish()
 			}
-			else
-				finish()
 		}
 		endQuiz.show()
 	}

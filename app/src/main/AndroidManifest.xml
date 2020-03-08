@@ -14,7 +14,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
-		<activity android:name=".PlayQuizActivity"></activity>
+		<activity android:name=".ProfileActivity"></activity>
+		<activity android:name=".PlayQuizActivity" />
 		<activity android:name=".CreateQuizActivity" />
 		<activity android:name=".QuizListActivity" />
 		<activity android:name=".HomeScreen" />

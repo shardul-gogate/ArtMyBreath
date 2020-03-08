@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -33,13 +34,15 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun getCurrentUserInfo() {
+		if(firebaseAuth.currentUser!!.isAnonymous)
+			return
 		USER_COLLECTION_REFERENCE.document(firebaseAuth.currentUser!!.uid).get().addOnCompleteListener {
 			if(it.isSuccessful) {
 				val userDoc=it.result
 				if(userDoc!=null) {
-					currUser=User(userDoc.get(FIRST_NAME) as String,userDoc.get(LAST_NAME) as String)
+					currUser=User(userDoc.get(FIRST_NAME) as String,userDoc.get(LAST_NAME) as String,firebaseAuth.currentUser!!.uid,firebaseAuth.currentUser!!.email.toString())
 					val navigationHeader=homeScreenDrawer.getHeaderView(0)
-					navigationHeader.findViewById<LinearLayout>(R.id.navigationDrawerProfile).findViewById<TextView>(R.id.navigationHeaderUsername).text="${currUser.firstName} ${currUser.lastName}"
+					navigationHeader.findViewById<LinearLayout>(R.id.navigationDrawerProfile).findViewById<TextView>(R.id.navigationHeaderUsername).text="${currUser.getFirstName()} ${currUser.getLastName()}"
 				}
 			}
 		}
@@ -54,7 +57,7 @@ class HomeScreen : AppCompatActivity() {
 		if(homeScreenDrawerLayout.isDrawerOpen(GravityCompat.START))
 			homeScreenDrawerLayout.closeDrawers()
 		else
-			super.onBackPressed()
+			logout()
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
@@ -107,10 +110,18 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun openProfile() {
-		Snackbar.make(homeScreenDrawerLayout,"Profile section coming soon",Snackbar.LENGTH_LONG).show()
+		if(firebaseAuth.currentUser!!.isAnonymous) {
+			Snackbar.make(homeScreenDrawerLayout,"Cannot open profile when anonymous",Snackbar.LENGTH_LONG).show()
+			return
+		}
+		Intent(this,ProfileActivity::class.java).also { startActivity(it) }
 	}
 
 	private fun createQuiz() {
+		if(firebaseAuth.currentUser!!.isAnonymous) {
+			Snackbar.make(homeScreenDrawerLayout,"Cannot create quiz when anonymous",Snackbar.LENGTH_LONG).show()
+			return
+		}
 		Intent(this,CreateQuizActivity::class.java).also { startActivity(it) }
 	}
 
@@ -123,9 +134,15 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun logout() {
-		firebaseAuth.signOut()
-		Intent(this,LoginActivity::class.java).also { startActivity(it) }
-		finish()
+		val logoutAlert: AlertDialog.Builder=AlertDialog.Builder(this)
+		logoutAlert.setTitle("Confirm logout")
+		logoutAlert.setMessage("Do you want to logout")
+		logoutAlert.setPositiveButton("Yes") { _,_ ->
+			firebaseAuth.signOut()
+			Intent(this,LoginActivity::class.java).also { startActivity(it) }
+			finish()
+		}
+		logoutAlert.setNegativeButton("No"){ _,_ -> }
 	}
 
 	private fun artBlog() {

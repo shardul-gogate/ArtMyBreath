@@ -26,12 +26,34 @@ class LoginActivity : AppCompatActivity() {
 
 	private fun setListeners() {
 		memberSignUpLabel.setOnClickListener {
-			hideLoadingAlert()
 			Intent(this,RegisterActivity::class.java).also { startActivity(it) }
 		}
 
 		loginButton.setOnClickListener {
 			userSignIn()
+		}
+
+		anonymousLogin.setOnClickListener {
+			val anonymousAlert: AlertDialog.Builder=AlertDialog.Builder(this)
+			anonymousAlert.setTitle("Continue anonymously")
+			anonymousAlert.setMessage("By continuing anonymously, you wil forfeit features such as portfolio creation, quiz review, etc. Continue?")
+			anonymousAlert.setPositiveButton("Yes") { _,_ ->
+				showLoadingAlert()
+				firebaseAuth.signInAnonymously().addOnCompleteListener {
+					if(it.isSuccessful) {
+						Toast.makeText(this,"Sign-in successful",Toast.LENGTH_SHORT).show()
+						Intent(this,HomeScreen::class.java).also { intent -> startActivity(intent) }
+						hideLoadingAlert()
+						finish()
+					}
+					else {
+						Snackbar.make(loginActivityLayout,"Something went wrong. Could not continue",Snackbar.LENGTH_LONG).show()
+						hideLoadingAlert()
+					}
+				}
+			}
+			anonymousAlert.setNegativeButton("No"){ _,_ -> }
+			anonymousAlert.show()
 		}
 	}
 

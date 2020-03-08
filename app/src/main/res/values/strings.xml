@@ -4,7 +4,7 @@
 	<string name="register">Register</string>
 	<string name="emailHint">Enter your email</string>
 	<string name="appWideFont">casual</string>
-	<string name="email">Email</string>
+	<string name="email">Email:</string>
 	<string name="password">Password</string>
 	<string name="confirmPassword">Confirm Password</string>
 	<string name="passwordHint">Enter your password</string>
@@ -40,12 +40,18 @@
 	<string name="artJobs">Art Jobs</string>
 	<string name="anonLogin"><u>Continue anonymously</u></string>
 	<string name="loading">Loading . . . </string>
+	<string name="fullName">Full name:</string>
+	<string name="updateProfile">Update profile</string>
+	<string name="addPortfolio">Add portfolio</string>
+	<string name="portfolios">Portfolios</string>
+	<string name="category">Category</string>
+	<string name="subCategory">Sub-category</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>
 	<dimen name="largerFont">36sp</dimen>
 	<dimen name="largestFont">40sp</dimen>
-	<dimen name="standardButton">30dp</dimen>
+	<dimen name="standardButton">28dp</dimen>
 
 	<string name="testText">Hello and welcome to Art My Breath\nThis application is undergoing\ndevelopment. Please swipe from the\nleft side of the screen to begin"</string>
 </resources>

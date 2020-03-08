@@ -11,7 +11,6 @@ import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_quizlist.*
 
 class QuizListActivity : Activity(), AdapterView.OnItemClickListener {
-	private lateinit var quizCollection: CollectionReference
 
 	private lateinit var quizAdapter: QuizListAdapter
 	private lateinit var quizList: ListView
@@ -34,8 +33,7 @@ class QuizListActivity : Activity(), AdapterView.OnItemClickListener {
 
 	private fun getQuizTitles() {
 		showProgressBar()
-		quizCollection=firebaseFirestore.collection("quiz")
-		quizCollection.get().addOnSuccessListener {
+		QUIZ_COLLECTION_REFERENCE.get().addOnSuccessListener {
 			for(quizReference in it) {
 				val quizID=quizReference.id
 				val quizMap=quizReference.data

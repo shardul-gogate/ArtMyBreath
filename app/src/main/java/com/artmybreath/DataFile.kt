@@ -8,7 +8,18 @@ class Quiz(val quizTitle: String, val questionCount: Int, val quizBy: String, va
 
 class Question (val questionTitle: String, val answerOne: String, val answerTwo: String, val answerThree: String, val answerFour: String, val correctAnswer: Int)
 
-class User(val firstName: String, val lastName: String)
+class User(private val firstName: String, private val lastName: String, private val userID: String, private val emailID: String) {
+
+	fun getFirstName(): String = firstName
+
+	fun getLastName(): String = lastName
+
+	fun getEmail(): String = emailID
+
+	fun getUserID(): String = userID
+}
+
+class Portfolio(val category: String, val subCategory: String, val descripion: String)
 
 lateinit var currUser: User
 
@@ -52,6 +63,16 @@ const val QUESTIONS_COLLECTION: String="questions"
 
 const val USER_COLLECTION: String="users"
 
+const val PORTFOLIO_COLLECTION: String="portfolios"
+
+const val CATEGORY: String="category"
+
+const val SUB_CATEGORY: String="subCategory"
+
+const val DESCRIPTION: String="description"
+
 val QUIZ_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(QUIZ_COLLECTION)
 
 val USER_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(USER_COLLECTION)
+
+val PORTFOLIO_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(PORTFOLIO_COLLECTION)

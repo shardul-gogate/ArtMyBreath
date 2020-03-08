@@ -25,6 +25,7 @@ class CreateQuizActivity : AppCompatActivity() {
 	private lateinit var answerThree: String
 	private lateinit var answerFour: String
 
+	private var quizInstanceCreated: Boolean=false
 	private var correctAnswer: Int=0
 	private var questionCount: Int=0
 	private lateinit var quizReference: DocumentReference
@@ -87,7 +88,7 @@ class CreateQuizActivity : AppCompatActivity() {
 			return
 		}
 
-		val userIDForQuiz: String= firebaseAuth.currentUser!!.uid
+		val userIDForQuiz: String= currUser.getUserID()
 
 		quizReference= QUIZ_COLLECTION_REFERENCE.document()
 		quizReference.set(
@@ -100,6 +101,7 @@ class CreateQuizActivity : AppCompatActivity() {
 			Log.d("quizCreationFailure",it.toString())
 		}
 		questionCollection=quizReference.collection(QUESTIONS_COLLECTION)
+		quizInstanceCreated=true
 	}
 
 	fun onAnswerSelected(view: View) {
@@ -181,14 +183,15 @@ class CreateQuizActivity : AppCompatActivity() {
 		exitAlert.setTitle("Confirm exit")
 		exitAlert.setMessage("Do you surely want to quit? This will erase the quiz")
 		exitAlert.setPositiveButton("Yes"){ _,_ ->
-			quizReference.delete().addOnCompleteListener{
-				if(it.isSuccessful) {
-					Toast.makeText(this,"Quiz creation exited and quiz deleted",Toast.LENGTH_SHORT).show()
+			if(quizInstanceCreated)
+				quizReference.delete().addOnCompleteListener{
+					if(it.isSuccessful) {
+						Toast.makeText(this,"Quiz creation exited and quiz deleted",Toast.LENGTH_SHORT).show()
+					}
+					else {
+						Toast.makeText(this,"Failed to delete quiz",Toast.LENGTH_SHORT).show()
+					}
 				}
-				else {
-					Toast.makeText(this,"Failed to delete quiz",Toast.LENGTH_SHORT).show()
-				}
-			}
 			finish()
 		}
 		exitAlert.setNegativeButton("No") { _,_ -> }
