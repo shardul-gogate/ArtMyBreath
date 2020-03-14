@@ -2,34 +2,34 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/createQuizLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".CreateQuizActivity"
 	android:background="@color/lightBlue"
-	android:id="@+id/createQuizLayout">
+	tools:context=".CreateQuizActivity">
 
 	<LinearLayout
 		android:id="@+id/quizTitleLinear"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintBottom_toBottomOf="parent"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
 
 		<EditText
 			android:id="@+id/quizTitleField"
 			style="@style/stdEdtTextStyle"
-			android:hint="@string/quizTitle"/>
+			android:hint="@string/quizTitle" />
 
 		<Button
 			android:id="@+id/startButton"
-			android:text="@string/start"
-			android:layout_marginTop="50dp"
+			style="@style/stdButton"
 			android:layout_gravity="center"
+			android:layout_marginTop="50dp"
 			android:gravity="center_horizontal"
-			style="@style/stdButton"/>
+			android:text="@string/start" />
 
 	</LinearLayout>
 
@@ -37,6 +37,7 @@
 		android:id="@+id/quizFormLinear"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:alpha="0"
 		android:orientation="vertical"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
@@ -44,101 +45,103 @@
 
 		<EditText
 			android:id="@+id/quizQuestionTitle"
-			android:layout_marginTop="80dp"
 			style="@style/stdEdtTextStyle"
+			android:layout_marginTop="80dp"
 			android:hint="@string/questionTitle" />
 
 		<EditText
 			android:id="@+id/choiceOneField"
-			android:layout_marginTop="60dp"
 			style="@style/stdEdtTextStyle"
+			android:layout_marginTop="60dp"
 			android:hint="@string/choiceOne" />
 
 		<EditText
 			android:id="@+id/choiceTwoField"
-			android:layout_marginTop="15dp"
 			style="@style/stdEdtTextStyle"
+			android:layout_marginTop="15dp"
 			android:hint="@string/choiceTwo" />
 
 		<EditText
 			android:id="@+id/choiceThreeField"
-			android:layout_marginTop="15dp"
 			style="@style/stdEdtTextStyle"
+			android:layout_marginTop="15dp"
 			android:hint="@string/choiceThree" />
 
 		<EditText
 			android:id="@+id/choiceFourField"
-			android:layout_marginTop="15dp"
 			style="@style/stdEdtTextStyle"
+			android:layout_marginTop="15dp"
 			android:hint="@string/choiceFour" />
 
 	</LinearLayout>
 
 	<LinearLayout
 		android:id="@+id/choiceButtonLinear"
-		app:layout_constraintTop_toBottomOf="@id/quizFormLinear"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		android:layout_marginTop="20dp"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:layout_marginTop="20dp"
+		android:alpha="0"
+		android:orientation="horizontal"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/quizFormLinear">
 
 		<Button
-			android:layout_width="50dp"
 			android:id="@+id/correctAnsOne"
-			android:text="@string/digitOne"
+			style="@style/stdButton"
+			android:layout_width="50dp"
 			android:onClick="onAnswerSelected"
-			style="@style/stdButton"/>
+			android:text="@string/digitOne" />
 
 		<Button
-			android:layout_marginLeft="12dp"
-			android:layout_width="50dp"
 			android:id="@+id/correctAnsTwo"
-			android:text="@string/digitTwo"
-			android:onClick="onAnswerSelected"
-			style="@style/stdButton"/>
-
-		<Button
+			style="@style/stdButton"
 			android:layout_width="50dp"
 			android:layout_marginLeft="12dp"
+			android:onClick="onAnswerSelected"
+			android:text="@string/digitTwo" />
+
+		<Button
 			android:id="@+id/correctAnsThree"
-			android:text="@string/digitThree"
-			android:onClick="onAnswerSelected"
-			style="@style/stdButton"/>
-
-		<Button
+			style="@style/stdButton"
 			android:layout_width="50dp"
 			android:layout_marginLeft="12dp"
-			android:id="@+id/correctAnsFour"
-			android:text="@string/digitFour"
 			android:onClick="onAnswerSelected"
-			style="@style/stdButton"/>
+			android:text="@string/digitThree" />
+
+		<Button
+			android:id="@+id/correctAnsFour"
+			style="@style/stdButton"
+			android:layout_width="50dp"
+			android:layout_marginLeft="12dp"
+			android:onClick="onAnswerSelected"
+			android:text="@string/digitFour" />
 
 	</LinearLayout>
 
 	<LinearLayout
 		android:id="@+id/operationsButtonLinear"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:alpha="0"
 		android:orientation="vertical"
-		app:layout_constraintTop_toBottomOf="@id/choiceButtonLinear"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content">
+		app:layout_constraintTop_toBottomOf="@id/choiceButtonLinear">
 
 		<Button
 			android:id="@+id/nextButton"
-			android:text="@string/saveAndNext"
+			style="@style/stdButton"
 			android:layout_gravity="center"
-			style="@style/stdButton"/>
+			android:text="@string/saveAndNext" />
 
 		<Button
 			android:id="@+id/finishButton"
-			android:text="@string/saveAndFinish"
+			style="@style/stdButton"
 			android:layout_gravity="center"
 			android:layout_marginTop="20dp"
-			style="@style/stdButton"/>
+			android:text="@string/saveAndFinish" />
 
 	</LinearLayout>
 

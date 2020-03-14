@@ -5,19 +5,19 @@
 
 	<TextView
 		android:id="@+id/portfolioCategory"
-		android:text="@string/category"
-		android:textSize="@dimen/largeFont"
-		android:layout_marginTop="5dp"
+		style="@style/stdTextStyle"
 		android:layout_marginLeft="15dp"
-		style="@style/stdTextStyle"/>
+		android:layout_marginTop="5dp"
+		android:text="@string/category"
+		android:textSize="@dimen/largeFont" />
 
 	<TextView
 		android:id="@+id/portfolioSubcategory"
-		android:text="@string/subCategory"
-		android:textSize="@dimen/standardFont"
+		style="@style/stdTextStyle"
 		android:layout_below="@id/portfolioCategory"
 		android:layout_marginLeft="15dp"
-		style="@style/stdTextStyle"/>
+		android:text="@string/subCategory"
+		android:textSize="@dimen/standardFont" />
 
 
 </RelativeLayout>

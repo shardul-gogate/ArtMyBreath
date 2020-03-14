@@ -2,72 +2,73 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/loginActivityLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".LoginActivity"
 	android:background="@color/darkPurple"
-	android:id="@+id/loginActivityLayout">
-
-	<ImageView
-		android:id="@+id/loginSplash"
-		android:layout_width="150dp"
-		android:layout_height="170dp"
-		android:background="@drawable/ic_launcher"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		android:layout_marginTop="50dp"/>
+	tools:context=".LoginActivity">
 
 	<EditText
 		android:id="@+id/loginEmailField"
-		app:layout_constraintTop_toBottomOf="@id/loginSplash"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="40dp"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="230dp"
 		android:hint="@string/emailHint"
 		android:inputType="textEmailAddress"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
 	<EditText
 		android:id="@+id/loginPasswordField"
-		app:layout_constraintTop_toBottomOf="@id/loginEmailField"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
+		style="@style/stdEdtTextStyle"
 		android:layout_marginTop="20dp"
 		android:hint="@string/passwordHint"
 		android:inputType="textPassword"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/loginEmailField" />
 
 	<Button
 		android:id="@+id/loginButton"
-		app:layout_constraintTop_toBottomOf="@id/loginPasswordField"
+		style="@style/userAuthButton"
+		android:layout_marginTop="50dp"
+		android:elevation="7dp"
+		android:text="@string/login"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="50dp"
-		android:text="@string/login"
-		android:elevation="7dp"
-		style="@style/userAuthButton"/>
+		app:layout_constraintTop_toBottomOf="@id/loginPasswordField" />
 
 	<TextView
 		android:id="@+id/memberSignUpLabel"
-		app:layout_constraintTop_toBottomOf="@id/loginButton"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
+		style="@style/stdTextStyle"
 		android:layout_marginTop="30dp"
 		android:text="@string/memberSignUp"
 		android:textColor="@color/white"
 		android:textSize="@dimen/smallFont"
-		style="@style/stdTextStyle"/>
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
 	<TextView
 		android:id="@+id/anonymousLogin"
-		app:layout_constraintTop_toBottomOf="@id/memberSignUpLabel"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
+		style="@style/stdTextStyle"
 		android:layout_marginTop="30dp"
+		android:text="@string/anonLogin"
 		android:textColor="@color/white"
 		android:textSize="@dimen/smallFont"
-		android:text="@string/anonLogin"
-		style="@style/stdTextStyle"/>
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/memberSignUpLabel" />
+
+	<ImageView
+		android:id="@+id/sharedLoginSplash"
+		android:layout_width="250dp"
+		android:layout_height="270dp"
+		android:layout_marginTop="120dp"
+		android:background="@drawable/ic_launcher"
+		android:transitionName="sharedSplash"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

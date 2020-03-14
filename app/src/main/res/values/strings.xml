@@ -4,7 +4,7 @@
 	<string name="register">Register</string>
 	<string name="emailHint">Enter your email</string>
 	<string name="appWideFont">casual</string>
-	<string name="email">Email:</string>
+	<string name="email">Email</string>
 	<string name="password">Password</string>
 	<string name="confirmPassword">Confirm Password</string>
 	<string name="passwordHint">Enter your password</string>
@@ -46,6 +46,9 @@
 	<string name="portfolios">Portfolios</string>
 	<string name="category">Category</string>
 	<string name="subCategory">Sub-category</string>
+	<string name="phoneNumberUpdate">Phone Number:</string>
+	<string name="emailUpdate">Email:</string>
+	<string name="saveChanges">Save Changes</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

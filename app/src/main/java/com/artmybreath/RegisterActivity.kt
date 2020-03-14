@@ -96,10 +96,10 @@ class RegisterActivity : AppCompatActivity() {
 
 	private fun createLoadingAlert() {
 		loadingAlertDialog = AlertDialog.Builder(this).create()
-		loadingAlertDialog.setTitle("")
 		val alertLayout: View=layoutInflater.inflate(R.layout.layout_loadingalert,null)
 		loadingAlertDialog.setTitle("")
 		loadingAlertDialog.setView(alertLayout)
+		loadingAlertDialog.setCancelable(false)
 	}
 
 	private fun showLoadingAlert() {

@@ -1,5 +1,6 @@
 package com.artmybreath
 
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -81,6 +82,7 @@ class CreateQuizActivity : AppCompatActivity() {
 	}
 
 	private fun createQuizInstance() {
+		fadeInQuizForm()
 		quizTitle=quizTitleField.text.toString()
 
 		if(quizTitle.isEmpty()) {
@@ -196,5 +198,16 @@ class CreateQuizActivity : AppCompatActivity() {
 		}
 		exitAlert.setNegativeButton("No") { _,_ -> }
 		exitAlert.show()
+	}
+
+	private fun fadeInQuizForm() {
+		val fadeOutTitle = ObjectAnimator.ofFloat(quizTitleLinear,View.ALPHA,0f)
+		fadeOutTitle.start()
+		val fadeInQuestion = ObjectAnimator.ofFloat(quizFormLinear,View.ALPHA,1f)
+		fadeInQuestion.start()
+		val fadeInChoices = ObjectAnimator.ofFloat(choiceButtonLinear,View.ALPHA,1f)
+		fadeInChoices.start()
+		val fadeInButtons = ObjectAnimator.ofFloat(operationsButtonLinear,View.ALPHA,1f)
+		fadeInButtons.start()
 	}
 }

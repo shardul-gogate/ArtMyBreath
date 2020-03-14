@@ -1,11 +1,13 @@
 package com.artmybreath
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -16,6 +18,8 @@ class LoginActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_login)
+
+		animateElements()
 
 		createLoadingAlert()
 
@@ -85,11 +89,37 @@ class LoginActivity : AppCompatActivity() {
 		}
 	}
 
+	private fun animateElements() {
+		loginEmailField.alpha=0f
+		loginPasswordField.alpha=0f
+		loginButton.alpha=0f
+		memberSignUpLabel.alpha=0f
+		anonymousLogin.alpha=0f
+
+		val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.6f)
+		val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.6f)
+		val animator = ObjectAnimator.ofPropertyValuesHolder(sharedLoginSplash,scaleX,scaleY)
+		animator.duration = 700
+		animator.start()
+
+
+		val translate = ObjectAnimator.ofFloat(sharedLoginSplash, View.TRANSLATION_Y, -400f)
+		translate.duration = 700
+		translate.start()
+
+		fadeInElement(loginEmailField)
+		fadeInElement(loginPasswordField)
+		fadeInElement(loginButton)
+		fadeInElement(memberSignUpLabel)
+		fadeInElement(anonymousLogin)
+	}
+
 	private fun createLoadingAlert() {
 		loadingAlertDialog = AlertDialog.Builder(this).create()
 		loadingAlertDialog.setTitle("")
 		val alertLayout: View=layoutInflater.inflate(R.layout.layout_loadingalert,null)
 		loadingAlertDialog.setView(alertLayout)
+		loadingAlertDialog.setCancelable(false)
 	}
 
 	private fun showLoadingAlert() {
@@ -98,5 +128,11 @@ class LoginActivity : AppCompatActivity() {
 
 	private fun hideLoadingAlert() {
 		loadingAlertDialog.dismiss()
+	}
+
+	private fun fadeInElement(element: View) {
+		val fadeIn = ObjectAnimator.ofFloat(element,View.ALPHA,1f)
+		fadeIn.duration = 1000
+		fadeIn.start()
 	}
 }

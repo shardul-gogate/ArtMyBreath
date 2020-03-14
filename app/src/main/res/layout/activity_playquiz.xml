@@ -9,68 +9,68 @@
 
 	<TextView
 		android:id="@+id/playQuizQuestion"
+		style="@style/stdTextStyle"
 		android:layout_width="match_parent"
-		android:textAlignment="center"
+		android:layout_marginTop="100dp"
 		android:background="@color/darkPurple"
-		app:layout_constraintTop_toTopOf="parent"
+		android:text="@string/questionTitle"
+		android:textAlignment="center"
+		android:textColor="@color/white"
+		android:textSize="@dimen/largerFont"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="100dp"
-		android:textSize="@dimen/largerFont"
-		android:text="@string/questionTitle"
-		android:textColor="@color/white"
-		style="@style/stdTextStyle"/>
+		app:layout_constraintTop_toTopOf="parent" />
 
 	<RadioGroup
 		android:id="@+id/quizAnswersRadioGroup"
-		app:layout_constraintTop_toBottomOf="@id/playQuizQuestion"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="35dp"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="35dp"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		app:layout_constraintTop_toBottomOf="@id/playQuizQuestion">
 
 		<RadioButton
 			android:id="@+id/answerOneRadio"
+			style="@style/stdRadioButton"
 			android:layout_gravity="center"
-			android:text="@string/choiceOne"
-			style="@style/stdRadioButton"/>
+			android:text="@string/choiceOne" />
 
 		<RadioButton
 			android:id="@+id/answerTwoRadio"
+			style="@style/stdRadioButton"
 			android:layout_gravity="center"
 			android:layout_marginTop="15dp"
-			android:text="@string/choiceTwo"
-			style="@style/stdRadioButton"/>
+			android:text="@string/choiceTwo" />
 
 		<RadioButton
 			android:id="@+id/answerThreeRadio"
+			style="@style/stdRadioButton"
 			android:layout_gravity="center"
 			android:layout_marginTop="15dp"
-			android:text="@string/choiceThree"
-			style="@style/stdRadioButton"/>
+			android:text="@string/choiceThree" />
 
 		<RadioButton
 			android:id="@+id/answerFourRadio"
+			style="@style/stdRadioButton"
 			android:layout_gravity="center"
 			android:layout_marginTop="15dp"
-			android:text="@string/choiceFour"
-			style="@style/stdRadioButton"/>
+			android:text="@string/choiceFour" />
 
 	</RadioGroup>
 
 	<Button
 		android:id="@+id/submitAnswer"
-		app:layout_constraintTop_toBottomOf="@id/quizAnswersRadioGroup"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="50dp"
+		style="@style/stdButton"
 		android:layout_width="300dp"
+		android:layout_marginTop="50dp"
 		android:backgroundTint="@color/darkGray"
+		android:elevation="7dp"
+		android:text="@string/submitAnswer"
 		android:textColor="@color/white"
 		android:textStyle="bold"
-		android:text="@string/submitAnswer"
-		android:elevation="7dp"
-		style="@style/stdButton"/>
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/quizAnswersRadioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

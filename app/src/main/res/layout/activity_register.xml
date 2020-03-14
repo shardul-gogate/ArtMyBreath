@@ -2,80 +2,80 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/registerActivityLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".RegisterActivity"
 	android:background="@color/darkPurple"
-	android:id="@+id/registerActivityLayout">
+	tools:context=".RegisterActivity">
 
 	<EditText
 		android:id="@+id/firstNameField"
-		app:layout_constraintTop_toTopOf="parent"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="80dp"
+		android:hint="@string/firstName"
+		android:inputType="text"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="80dp"
-		android:inputType="text"
-		android:hint="@string/firstName"
-		style="@style/stdEdtTextStyle" />
+		app:layout_constraintTop_toTopOf="parent" />
 
 	<EditText
 		android:id="@+id/lastNameField"
-		app:layout_constraintTop_toBottomOf="@id/firstNameField"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="20dp"
+		android:hint="@string/lastName"
+		android:inputType="text"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="20dp"
-		android:inputType="text"
-		android:hint="@string/lastName"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintTop_toBottomOf="@id/firstNameField" />
 
 	<EditText
 		android:id="@+id/registerEmailField"
-		app:layout_constraintTop_toBottomOf="@id/lastNameField"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="20dp"
+		android:hint="@string/email"
+		android:inputType="textEmailAddress"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="20dp"
-		android:inputType="textEmailAddress"
-		android:hint="@string/email"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintTop_toBottomOf="@id/lastNameField" />
 
 	<EditText
 		android:id="@+id/registerPhoneField"
-		app:layout_constraintTop_toBottomOf="@id/registerEmailField"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="20dp"
+		android:hint="@string/phoneNumber"
+		android:inputType="phone"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="20dp"
-		android:inputType="phone"
-		android:hint="@string/phoneNumber"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintTop_toBottomOf="@id/registerEmailField" />
 
 	<EditText
 		android:id="@+id/registerPasswordField"
-		app:layout_constraintTop_toBottomOf="@id/registerPhoneField"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="20dp"
+		android:hint="@string/password"
+		android:inputType="textPassword"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="20dp"
-		android:inputType="textPassword"
-		android:hint="@string/password"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintTop_toBottomOf="@id/registerPhoneField" />
 
 	<EditText
 		android:id="@+id/confirmPasswordField"
-		app:layout_constraintTop_toBottomOf="@id/registerPasswordField"
+		style="@style/stdEdtTextStyle"
+		android:layout_marginTop="20dp"
+		android:hint="@string/confirmPassword"
+		android:inputType="textPassword"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="20dp"
-		android:inputType="textPassword"
-		android:hint="@string/confirmPassword"
-		style="@style/stdEdtTextStyle"/>
+		app:layout_constraintTop_toBottomOf="@id/registerPasswordField" />
 
 	<Button
 		android:id="@+id/registerButton"
-		app:layout_constraintTop_toBottomOf="@id/confirmPasswordField"
+		style="@style/userAuthButton"
+		android:layout_marginTop="50dp"
+		android:elevation="7dp"
+		android:text="@string/register"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
-		android:layout_marginTop="50dp"
-		android:text="@string/register"
-		android:elevation="7dp"
-		style="@style/userAuthButton"/>
+		app:layout_constraintTop_toBottomOf="@id/confirmPasswordField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

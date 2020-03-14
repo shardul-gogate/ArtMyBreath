@@ -8,13 +8,22 @@ class Quiz(val quizTitle: String, val questionCount: Int, val quizBy: String, va
 
 class Question (val questionTitle: String, val answerOne: String, val answerTwo: String, val answerThree: String, val answerFour: String, val correctAnswer: Int)
 
-class User(private val firstName: String, private val lastName: String, private val userID: String, private val emailID: String) {
+class User(private var firstName: String, private var lastName: String, private var userID: String, private var emailID: String, private var phoneNumber: String) {
+
+	fun updateUser(firstName: String, lastName: String, phoneNumber: String) {
+		this.firstName=firstName
+		this.lastName=lastName
+		this.emailID=emailID
+		this.phoneNumber=phoneNumber
+	}
 
 	fun getFirstName(): String = firstName
 
 	fun getLastName(): String = lastName
 
 	fun getEmail(): String = emailID
+
+	fun getPhone(): String = phoneNumber
 
 	fun getUserID(): String = userID
 }

@@ -40,7 +40,12 @@ class HomeScreen : AppCompatActivity() {
 			if(it.isSuccessful) {
 				val userDoc=it.result
 				if(userDoc!=null) {
-					currUser=User(userDoc.get(FIRST_NAME) as String,userDoc.get(LAST_NAME) as String,firebaseAuth.currentUser!!.uid,firebaseAuth.currentUser!!.email.toString())
+					currUser=User(userDoc.get(FIRST_NAME) as String,
+						userDoc.get(LAST_NAME) as String,
+						firebaseAuth.currentUser!!.uid,
+						firebaseAuth.currentUser!!.email.toString(),
+						userDoc.get(PHONE_NUMBER) as String
+					)
 					val navigationHeader=homeScreenDrawer.getHeaderView(0)
 					navigationHeader.findViewById<LinearLayout>(R.id.navigationDrawerProfile).findViewById<TextView>(R.id.navigationHeaderUsername).text="${currUser.getFirstName()} ${currUser.getLastName()}"
 				}
@@ -143,6 +148,7 @@ class HomeScreen : AppCompatActivity() {
 			finish()
 		}
 		logoutAlert.setNegativeButton("No"){ _,_ -> }
+		logoutAlert.show()
 	}
 
 	private fun artBlog() {

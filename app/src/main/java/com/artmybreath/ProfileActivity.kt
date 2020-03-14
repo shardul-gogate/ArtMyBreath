@@ -1,12 +1,14 @@
 package com.artmybreath
 
+import android.animation.ObjectAnimator
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.DocumentReference
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
@@ -24,6 +26,9 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 		createLoadingAlert()
 
 		setUserProfile()
+
+		setListeners()
+
 		portfolioList=findViewById(R.id.portfoliosList)
 		getUserPortfolios()
 	}
@@ -44,12 +49,77 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 			portfolioList.adapter=portfolioAdapter
 			portfolioList.isClickable=true
 			portfolioList.onItemClickListener=this
+			hideLoadingAlert()
+		}
+	}
+
+	private fun saveChanges() {
+		showLoadingAlert()
+		val currUserDoc: DocumentReference= USER_COLLECTION_REFERENCE.document(currUser.getUserID())
+		val newFirstName=updateFirstName.text.toString()
+		val newLastName=updateLastName.text.toString()
+		val newPhone=updatePhone.text.toString()
+		val newProfileMap: HashMap<String, Any> = hashMapOf(
+			FIRST_NAME to newFirstName,
+			LAST_NAME to newLastName,
+			EMAIL to currUser.getEmail(),
+			PHONE_NUMBER to newPhone
+		)
+		currUserDoc.update(newProfileMap).addOnSuccessListener {
+			profileDisplayConstraint.visibility=View.VISIBLE
+			updateProfileLinear.visibility=View.GONE
+			Snackbar.make(profileActivityLayout,"Profile updated",Snackbar.LENGTH_LONG).show()
+			currUser.updateUser(newFirstName,newLastName,newPhone)
+			setUserProfile()
+			hideLoadingAlert()
+		}.addOnFailureListener{
+			hideLoadingAlert()
+			profileDisplayConstraint.visibility=View.VISIBLE
+			updateProfileLinear.visibility=View.GONE
+			Snackbar.make(profileActivityLayout,"Failed to update profile",Snackbar.LENGTH_LONG).show()
 		}
 	}
 
 	private fun setUserProfile() {
 		profileNameField.text= "${currUser.getFirstName()} ${currUser.getLastName()}"
 		profileEmailField.text= currUser.getEmail()
+		profilePhoneField.text= currUser.getPhone()
+	}
+
+	private fun setListeners() {
+		updateProfileButton.setOnClickListener {
+			fadeInFields()
+			populateTextFields()
+			profileDisplayConstraint.visibility=View.GONE
+			updateProfileLinear.visibility=View.VISIBLE
+		}
+
+		saveChangesButton.setOnClickListener {
+			fadeInProfile()
+			saveChanges()
+		}
+
+		addPortfolioButton.setOnClickListener { finish() }
+	}
+
+	private fun fadeInProfile() {
+		val fadeOutFields = ObjectAnimator.ofFloat(updateProfileLinear,View.ALPHA,0f)
+		fadeOutFields.start()
+		val fadeInProfile = ObjectAnimator.ofFloat(profileDisplayConstraint,View.ALPHA,1f)
+		fadeInProfile.start()
+	}
+
+	private fun fadeInFields() {
+		val fadeOutProfile = ObjectAnimator.ofFloat(profileDisplayConstraint,View.ALPHA,0f)
+		fadeOutProfile.start()
+		val fadeInFields = ObjectAnimator.ofFloat(updateProfileLinear,View.ALPHA,1f)
+		fadeInFields.start()
+	}
+
+	private fun populateTextFields() {
+		updateFirstName.setText(currUser.getFirstName())
+		updateLastName.setText(currUser.getLastName())
+		updatePhone.setText(currUser.getPhone())
 	}
 
 	private fun createLoadingAlert() {
@@ -57,6 +127,7 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 		loadingAlertDialog.setTitle("")
 		val alertLayout: View =layoutInflater.inflate(R.layout.layout_loadingalert,null)
 		loadingAlertDialog.setView(alertLayout)
+		loadingAlertDialog.setCancelable(false)
 	}
 
 	private fun showLoadingAlert() {
@@ -65,5 +136,15 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 
 	private fun hideLoadingAlert() {
 		loadingAlertDialog.dismiss()
+	}
+
+	override fun onBackPressed() {
+		if(profileDisplayConstraint.visibility==View.VISIBLE)
+			super.onBackPressed()
+		else {
+			updateProfileLinear.visibility=View.GONE
+			profileDisplayConstraint.visibility=View.VISIBLE
+			fadeInProfile()
+		}
 	}
 }

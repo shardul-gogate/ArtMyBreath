@@ -4,19 +4,19 @@
 	android:layout_height="match_parent">
 
 	<ProgressBar
-		android:indeterminateTint="@color/darkPurple"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_marginLeft="15dp"
 		android:layout_marginTop="15dp"
-		android:paddingBottom="15dp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
+		android:indeterminateTint="@color/darkPurple"
+		android:paddingBottom="15dp" />
 
 	<TextView
-		android:text="@string/loading"
-		android:textSize="@dimen/largeFont"
+		style="@style/stdTextStyle"
 		android:layout_marginLeft="20dp"
-		android:paddingBottom="15dp"
 		android:layout_marginTop="15dp"
-		style="@style/stdTextStyle"/>
+		android:paddingBottom="15dp"
+		android:text="@string/loading"
+		android:textSize="@dimen/largeFont" />
 
 </LinearLayout>

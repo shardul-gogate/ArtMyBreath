@@ -6,22 +6,22 @@
 
 	<TextView
 		android:id="@+id/listQuizTitle"
+		style="@style/stdTextStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/quizTitle"
 		android:layout_marginStart="5dp"
 		android:layout_marginTop="5dp"
-		style="@style/stdTextStyle"/>
+		android:text="@string/quizTitle" />
 
 	<TextView
 		android:id="@+id/listQuizByQuestions"
+		style="@style/stdTextStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/quizBy"
 		android:layout_below="@id/listQuizTitle"
 		android:layout_marginStart="5dp"
 		android:layout_marginTop="5dp"
-		android:textSize="@dimen/smallFont"
-		style="@style/stdTextStyle"/>
+		android:text="@string/quizBy"
+		android:textSize="@dimen/smallFont" />
 
 </RelativeLayout>

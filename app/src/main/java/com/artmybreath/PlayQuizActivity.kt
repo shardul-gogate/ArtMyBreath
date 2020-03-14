@@ -126,6 +126,7 @@ class PlayQuizActivity : AppCompatActivity() {
 		loadingAlertDialog.setTitle("")
 		val alertLayout: View=layoutInflater.inflate(R.layout.layout_loadingalert,null)
 		loadingAlertDialog.setView(alertLayout)
+		loadingAlertDialog.setCancelable(false)
 	}
 
 	private fun showLoadingAlert() {
