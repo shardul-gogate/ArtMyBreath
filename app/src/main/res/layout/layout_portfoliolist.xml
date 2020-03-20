@@ -9,7 +9,7 @@
 		android:layout_marginLeft="15dp"
 		android:layout_marginTop="5dp"
 		android:text="@string/category"
-		android:textSize="@dimen/largeFont" />
+		android:textSize="@dimen/standardFont" />
 
 	<TextView
 		android:id="@+id/portfolioSubcategory"
@@ -17,7 +17,7 @@
 		android:layout_below="@id/portfolioCategory"
 		android:layout_marginLeft="15dp"
 		android:text="@string/subCategory"
-		android:textSize="@dimen/standardFont" />
+		android:textSize="@dimen/largeFont" />
 
 
 </RelativeLayout>

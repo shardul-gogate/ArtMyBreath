@@ -43,12 +43,14 @@
 	<string name="fullName">Full name:</string>
 	<string name="updateProfile">Update profile</string>
 	<string name="addPortfolio">Add portfolio</string>
+	<string name="createPortfolio">Create portfolio</string>
 	<string name="portfolios">Portfolios</string>
-	<string name="category">Category</string>
-	<string name="subCategory">Sub-category</string>
+	<string name="category">Select category</string>
+	<string name="subCategory">Select sub-category</string>
 	<string name="phoneNumberUpdate">Phone Number:</string>
 	<string name="emailUpdate">Email:</string>
 	<string name="saveChanges">Save Changes</string>
+	<string name="description">Description</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

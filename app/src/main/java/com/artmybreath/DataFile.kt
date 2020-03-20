@@ -13,7 +13,6 @@ class User(private var firstName: String, private var lastName: String, private 
 	fun updateUser(firstName: String, lastName: String, phoneNumber: String) {
 		this.firstName=firstName
 		this.lastName=lastName
-		this.emailID=emailID
 		this.phoneNumber=phoneNumber
 	}
 
@@ -28,7 +27,7 @@ class User(private var firstName: String, private var lastName: String, private 
 	fun getUserID(): String = userID
 }
 
-class Portfolio(val category: String, val subCategory: String, val descripion: String)
+class Portfolio(val category: String, val subCategory: String, val description: String)
 
 lateinit var currUser: User
 
@@ -79,6 +78,8 @@ const val CATEGORY: String="category"
 const val SUB_CATEGORY: String="subCategory"
 
 const val DESCRIPTION: String="description"
+
+const val PORTFOLIO_OF: String="portfolioOf"
 
 val QUIZ_COLLECTION_REFERENCE: CollectionReference=firebaseFirestore.collection(QUIZ_COLLECTION)
 

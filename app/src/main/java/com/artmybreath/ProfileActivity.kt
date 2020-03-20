@@ -2,10 +2,12 @@ package com.artmybreath
 
 import android.animation.ObjectAnimator
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentReference
@@ -37,7 +39,7 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 
 	private fun getUserPortfolios() {
 		showLoadingAlert()
-		PORTFOLIO_COLLECTION_REFERENCE.whereEqualTo("portfolioOf", currUser.getUserID()).get().addOnSuccessListener{
+		PORTFOLIO_COLLECTION_REFERENCE.whereEqualTo(PORTFOLIO_OF, currUser.getUserID()).get().addOnSuccessListener{
 			for(userPortfolio in it) {
 				val category=userPortfolio[CATEGORY] as String
 				val subCategory=userPortfolio[SUB_CATEGORY] as String
@@ -66,12 +68,12 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 			PHONE_NUMBER to newPhone
 		)
 		currUserDoc.update(newProfileMap).addOnSuccessListener {
-			profileDisplayConstraint.visibility=View.VISIBLE
-			updateProfileLinear.visibility=View.GONE
-			Snackbar.make(profileActivityLayout,"Profile updated",Snackbar.LENGTH_LONG).show()
+			Toast.makeText(this,"Profile updated",Toast.LENGTH_SHORT).show()
 			currUser.updateUser(newFirstName,newLastName,newPhone)
-			setUserProfile()
 			hideLoadingAlert()
+			Intent(this,MainActivity::class.java).also{ startActivity(it) }
+			finish()
+
 		}.addOnFailureListener{
 			hideLoadingAlert()
 			profileDisplayConstraint.visibility=View.VISIBLE
@@ -99,7 +101,10 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 			saveChanges()
 		}
 
-		addPortfolioButton.setOnClickListener { finish() }
+		createPortfolioActionButton.setOnClickListener {
+			Intent(this,AddPortfolioActivity::class.java).also { startActivity(it) }
+			finish()
+		}
 	}
 
 	private fun fadeInProfile() {
