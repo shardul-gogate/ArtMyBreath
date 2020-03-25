@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_createquiz.*
 
 class CreateQuizActivity : AppCompatActivity() {
 
-	private var whiteColor: Int=0
-	private var blackColor: Int=0
+	private var whiteColor: Int = 0
+	private var blackColor: Int = 0
 
 	private lateinit var quizTitle: String
 	private lateinit var questionTitle: String
@@ -26,9 +26,9 @@ class CreateQuizActivity : AppCompatActivity() {
 	private lateinit var answerThree: String
 	private lateinit var answerFour: String
 
-	private var quizInstanceCreated: Boolean=false
-	private var correctAnswer: Int=0
-	private var questionCount: Int=0
+	private var quizInstanceCreated: Boolean = false
+	private var correctAnswer: Int = 0
+	private var questionCount: Int = 0
 	private lateinit var quizReference: DocumentReference
 	private lateinit var questionCollection: CollectionReference
 
@@ -36,30 +36,53 @@ class CreateQuizActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_createquiz)
 
-		whiteColor=ContextCompat.getColor(this,R.color.white)
-		blackColor=ContextCompat.getColor(this,R.color.black)
+		whiteColor = ContextCompat.getColor(this, R.color.white)
+		blackColor = ContextCompat.getColor(this, R.color.black)
 
 		quizTitleVisibility()
 
 		setListeners()
 	}
 
-	private fun saveCurrentQuestion() {
-		questionCount+=1
-		questionTitle=quizQuestionTitle.text.toString()
-		answerOne=choiceOneField.text.toString()
-		answerTwo=choiceTwoField.text.toString()
-		answerThree=choiceThreeField.text.toString()
-		answerFour=choiceFourField.text.toString()
+	override fun onBackPressed() {
+		val exitAlert: AlertDialog.Builder = AlertDialog.Builder(this)
+		exitAlert.setTitle("Confirm exit")
+		exitAlert.setMessage("Do you surely want to quit? This will erase the quiz")
+		exitAlert.setPositiveButton("Yes") { _, _ ->
+			if (quizInstanceCreated)
+				quizReference.delete().addOnCompleteListener {
+					if (it.isSuccessful) {
+						Toast.makeText(
+							this,
+							"Quiz creation exited and quiz deleted",
+							Toast.LENGTH_SHORT
+						).show()
+					} else {
+						Toast.makeText(this, "Failed to delete quiz", Toast.LENGTH_SHORT).show()
+					}
+				}
+			finish()
+		}
+		exitAlert.setNegativeButton("No") { _, _ -> }
+		exitAlert.show()
+	}
 
-		if(questionTitle.isEmpty() || answerOne.isEmpty() || answerTwo.isEmpty() || answerThree.isEmpty() || answerFour.isEmpty()) {
-			Snackbar.make(createQuizLayout,"Some field are empty",Snackbar.LENGTH_LONG).show()
+	private fun saveCurrentQuestion() {
+		questionCount += 1
+		questionTitle = quizQuestionTitle.text.toString()
+		answerOne = choiceOneField.text.toString()
+		answerTwo = choiceTwoField.text.toString()
+		answerThree = choiceThreeField.text.toString()
+		answerFour = choiceFourField.text.toString()
+
+		if (questionTitle.isEmpty() || answerOne.isEmpty() || answerTwo.isEmpty() || answerThree.isEmpty() || answerFour.isEmpty()) {
+			Snackbar.make(createQuizLayout, "Some field are empty", Snackbar.LENGTH_LONG).show()
 			return
 		}
 
-		quizReference.update(QUESTION_COUNT,questionCount)
+		quizReference.update(QUESTION_COUNT, questionCount)
 
-		val questionMap: HashMap<String,Any> = hashMapOf(
+		val questionMap: HashMap<String, Any> = hashMapOf(
 			QUESTION_TITLE to questionTitle,
 			ANSWER_ONE to answerOne,
 			ANSWER_TWO to answerTwo,
@@ -68,9 +91,10 @@ class CreateQuizActivity : AppCompatActivity() {
 			CORRECT_ANSWER to correctAnswer
 		)
 
-		questionCollection.document("$QUESTION$questionCount").set(questionMap).addOnFailureListener{
-			Log.d("questionFailure",it.toString())
-		}
+		questionCollection.document("$QUESTION$questionCount").set(questionMap)
+			.addOnFailureListener {
+				Log.d("questionFailure", it.toString())
+			}
 	}
 
 	private fun clearFields() {
@@ -83,16 +107,16 @@ class CreateQuizActivity : AppCompatActivity() {
 
 	private fun createQuizInstance() {
 		fadeInQuizForm()
-		quizTitle=quizTitleField.text.toString()
+		quizTitle = quizTitleField.text.toString()
 
-		if(quizTitle.isEmpty()) {
-			Snackbar.make(createQuizLayout,"Quiz title not entered",Snackbar.LENGTH_LONG).show()
+		if (quizTitle.isEmpty()) {
+			Snackbar.make(createQuizLayout, "Quiz title not entered", Snackbar.LENGTH_LONG).show()
 			return
 		}
 
-		val userIDForQuiz: String= currUser.getUserID()
+		val userIDForQuiz: String = currUser.getUserID()
 
-		quizReference= QUIZ_COLLECTION_REFERENCE.document()
+		quizReference = QUIZ_COLLECTION_REFERENCE.document()
 		quizReference.set(
 			hashMapOf(
 				QUIZ_TITLE to quizTitle,
@@ -100,22 +124,22 @@ class CreateQuizActivity : AppCompatActivity() {
 				QUIZ_BY to userIDForQuiz
 			)
 		).addOnFailureListener {
-			Log.d("quizCreationFailure",it.toString())
+			Log.d("quizCreationFailure", it.toString())
 		}
-		questionCollection=quizReference.collection(QUESTIONS_COLLECTION)
-		quizInstanceCreated=true
+		questionCollection = quizReference.collection(QUESTIONS_COLLECTION)
+		quizInstanceCreated = true
 	}
 
 	fun onAnswerSelected(view: View) {
 		resetButtonColors()
 
-		operationsButtonLinear.visibility=View.VISIBLE
+		operationsButtonLinear.visibility = View.VISIBLE
 
-		val clickedButton=view as Button
+		val clickedButton = view as Button
 		clickedButton.setBackgroundColor(blackColor)
 		clickedButton.setTextColor(whiteColor)
 
-		correctAnswer=Integer.valueOf(clickedButton.text.toString())
+		correctAnswer = Integer.valueOf(clickedButton.text.toString())
 	}
 
 	private fun setListeners() {
@@ -125,7 +149,7 @@ class CreateQuizActivity : AppCompatActivity() {
 		}
 
 		nextButton.setOnClickListener {
-			operationsButtonLinear.visibility=View.GONE
+			operationsButtonLinear.visibility = View.GONE
 
 			saveCurrentQuestion()
 			clearFields()
@@ -136,20 +160,21 @@ class CreateQuizActivity : AppCompatActivity() {
 			saveCurrentQuestion()
 			clearFields()
 			resetButtonColors()
-			saveAndExitQuiz() }
+			saveAndExitQuiz()
+		}
 	}
 
 	private fun quizFormVisibility() {
-		quizTitleLinear.visibility= View.GONE
-		quizFormLinear.visibility=View.VISIBLE
-		choiceButtonLinear.visibility=View.VISIBLE
+		quizTitleLinear.visibility = View.GONE
+		quizFormLinear.visibility = View.VISIBLE
+		choiceButtonLinear.visibility = View.VISIBLE
 	}
 
 	private fun quizTitleVisibility() {
-		quizTitleLinear.visibility= View.VISIBLE
-		quizFormLinear.visibility=View.GONE
-		choiceButtonLinear.visibility=View.GONE
-		operationsButtonLinear.visibility=View.GONE
+		quizTitleLinear.visibility = View.VISIBLE
+		quizFormLinear.visibility = View.GONE
+		choiceButtonLinear.visibility = View.GONE
+		operationsButtonLinear.visibility = View.GONE
 	}
 
 	private fun resetButtonColors() {
@@ -167,47 +192,27 @@ class CreateQuizActivity : AppCompatActivity() {
 	}
 
 	private fun saveAndExitQuiz() {
-		val exitAlert: AlertDialog.Builder= AlertDialog.Builder(this)
+		val exitAlert: AlertDialog.Builder = AlertDialog.Builder(this)
 		exitAlert.setTitle("Confirm exit")
 		exitAlert.setMessage("Save and exit quiz creation?")
-		exitAlert.setPositiveButton("Yes"){ _,_ ->
-			Toast.makeText(this,"Quiz saved",Toast.LENGTH_SHORT).show()
+		exitAlert.setPositiveButton("Yes") { _, _ ->
+			Toast.makeText(this, "Quiz saved", Toast.LENGTH_SHORT).show()
 			finish()
 		}
-		exitAlert.setNegativeButton("No") { _,_ ->
+		exitAlert.setNegativeButton("No") { _, _ ->
 			clearFields()
 		}
 		exitAlert.show()
 	}
 
-	override fun onBackPressed() {
-		val exitAlert: AlertDialog.Builder= AlertDialog.Builder(this)
-		exitAlert.setTitle("Confirm exit")
-		exitAlert.setMessage("Do you surely want to quit? This will erase the quiz")
-		exitAlert.setPositiveButton("Yes"){ _,_ ->
-			if(quizInstanceCreated)
-				quizReference.delete().addOnCompleteListener{
-					if(it.isSuccessful) {
-						Toast.makeText(this,"Quiz creation exited and quiz deleted",Toast.LENGTH_SHORT).show()
-					}
-					else {
-						Toast.makeText(this,"Failed to delete quiz",Toast.LENGTH_SHORT).show()
-					}
-				}
-			finish()
-		}
-		exitAlert.setNegativeButton("No") { _,_ -> }
-		exitAlert.show()
-	}
-
 	private fun fadeInQuizForm() {
-		val fadeOutTitle = ObjectAnimator.ofFloat(quizTitleLinear,View.ALPHA,0f)
+		val fadeOutTitle = ObjectAnimator.ofFloat(quizTitleLinear, View.ALPHA, 0f)
 		fadeOutTitle.start()
-		val fadeInQuestion = ObjectAnimator.ofFloat(quizFormLinear,View.ALPHA,1f)
+		val fadeInQuestion = ObjectAnimator.ofFloat(quizFormLinear, View.ALPHA, 1f)
 		fadeInQuestion.start()
-		val fadeInChoices = ObjectAnimator.ofFloat(choiceButtonLinear,View.ALPHA,1f)
+		val fadeInChoices = ObjectAnimator.ofFloat(choiceButtonLinear, View.ALPHA, 1f)
 		fadeInChoices.start()
-		val fadeInButtons = ObjectAnimator.ofFloat(operationsButtonLinear,View.ALPHA,1f)
+		val fadeInButtons = ObjectAnimator.ofFloat(operationsButtonLinear, View.ALPHA, 1f)
 		fadeInButtons.start()
 	}
 }

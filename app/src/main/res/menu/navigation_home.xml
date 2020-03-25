@@ -6,27 +6,27 @@
 			<item
 				android:id="@+id/playQuizNavigation"
 				android:icon="@drawable/ic_play"
-				android:title="@string/playQuiz"/>
+				android:title="@string/playQuiz" />
 			<item
 				android:id="@+id/createQuizNavigation"
 				android:icon="@drawable/ic_edit"
-				android:title="@string/createQuiz"/>
+				android:title="@string/createQuiz" />
 		</menu>
 	</item>
 
 	<item
 		android:id="@+id/artBlogNavigation"
 		android:icon="@drawable/ic_book"
-		android:title="@string/artBlog"/>
+		android:title="@string/artBlog" />
 
 	<item
 		android:id="@+id/artEventsNavigation"
 		android:icon="@drawable/ic_public"
-		android:title="@string/artEvents"/>
+		android:title="@string/artEvents" />
 
 	<item
 		android:id="@+id/artJobsNavigation"
 		android:icon="@drawable/ic_person"
-		android:title="@string/artJobs"/>
+		android:title="@string/artJobs" />
 
 </menu>

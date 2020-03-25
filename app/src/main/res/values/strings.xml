@@ -51,6 +51,7 @@
 	<string name="emailUpdate">Email:</string>
 	<string name="saveChanges">Save Changes</string>
 	<string name="description">Description</string>
+	<string name="search">Search</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

@@ -1,9 +1,8 @@
 package com.artmybreath
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.ActivityOptionsCompat
+import androidx.appcompat.app.AppCompatActivity
 import java.lang.Thread.sleep
 import kotlin.concurrent.thread
 
@@ -17,12 +16,12 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun splashScreen() {
-		val splash=thread(start=false) {
-			sleep(2000)
-			if(firebaseAuth.currentUser==null)
-				Intent(this,LoginActivity::class.java).also { startActivity(it) }
+		val splash = thread(start = false) {
+			sleep(1600)
+			if (firebaseAuth.currentUser == null)
+				Intent(this, LoginActivity::class.java).also { startActivity(it) }
 			else
-				Intent(this,HomeScreen::class.java).also { startActivity(it) }
+				Intent(this, HomeScreen::class.java).also { startActivity(it) }
 			finish()
 		}
 		splash.start()

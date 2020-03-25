@@ -5,13 +5,19 @@
 	<item
 		android:id="@+id/toolbarSettings"
 		android:icon="@drawable/ic_settings"
-		app:showAsAction="always"
-		android:title="@string/settings"/>
+		android:title="@string/settings"
+		app:showAsAction="ifRoom" />
+
+	<item
+		android:id="@+id/toolbarSearch"
+		android:icon="@drawable/ic_search"
+		android:title="@string/search"
+		app:showAsAction="always" />
 
 	<item
 		android:id="@+id/toolbarLogout"
 		android:icon="@drawable/ic_logout"
-		app:showAsAction="always"
-		android:title="@string/logout"/>
+		android:title="@string/logout"
+		app:showAsAction="always" />
 
 </menu>
