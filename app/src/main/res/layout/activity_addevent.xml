@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/orange"
+	tools:context=".AddEventActivity">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<EditText
+			android:id="@+id/eventTitleField"
+			style="@style/stdEditTextStyle"
+			android:layout_marginTop="70dp"
+			android:text="@string/eventTitle"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<EditText
+			android:id="@+id/eventVenueField"
+			style="@style/stdEditTextStyle"
+			android:layout_marginTop="25dp"
+			android:text="@string/eventVenue"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventTitleField" />
+
+		<TextView
+			android:id="@+id/eventTypeLabel"
+			style="@style/stdTextStyle"
+			android:layout_marginTop="30dp"
+			android:text="@string/eventType"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventVenueField" />
+
+		<RadioGroup
+			android:id="@+id/eventTypeRadioGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="15dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventTypeLabel">
+
+			<RadioButton
+				android:id="@+id/bookableRadio"
+				style="@style/stdRadioButton"
+				android:text="@string/bookable" />
+
+			<RadioButton
+				android:id="@+id/publishableRadio"
+				style="@style/stdRadioButton"
+				android:layout_marginTop="5dp"
+				android:text="@string/publishable" />
+
+		</RadioGroup>
+
+		<TextView
+			android:id="@+id/eventDateLabel"
+			style="@style/stdTextStyle"
+			android:layout_marginTop="30dp"
+			android:text="@string/eventDate"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventTypeRadioGroup" />
+
+		<LinearLayout
+			android:id="@+id/eventFullDateSpinnerLinear"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventDateLabel">
+
+			<Spinner
+				android:id="@+id/eventDateSpinner"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<Spinner
+				android:id="@+id/eventMonthSpinner"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="20dp" />
+
+			<Spinner
+				android:id="@+id/eventYearSpinner"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="20dp" />
+
+		</LinearLayout>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

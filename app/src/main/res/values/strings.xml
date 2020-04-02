@@ -52,6 +52,12 @@
 	<string name="saveChanges">Save Changes</string>
 	<string name="description">Description</string>
 	<string name="search">Search</string>
+	<string name="eventTitle">Event title</string>
+	<string name="eventVenue">Event venue</string>
+	<string name="eventDate">Event date</string>
+	<string name="bookable">Bookable</string>
+	<string name="publishable">Publishable</string>
+	<string name="eventType">Event type</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

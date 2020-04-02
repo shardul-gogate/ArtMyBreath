@@ -20,7 +20,7 @@
 
 		<EditText
 			android:id="@+id/quizTitleField"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:hint="@string/quizTitle" />
 
 		<Button
@@ -45,31 +45,31 @@
 
 		<EditText
 			android:id="@+id/quizQuestionTitle"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:layout_marginTop="80dp"
 			android:hint="@string/questionTitle" />
 
 		<EditText
 			android:id="@+id/choiceOneField"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:layout_marginTop="60dp"
 			android:hint="@string/choiceOne" />
 
 		<EditText
 			android:id="@+id/choiceTwoField"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:layout_marginTop="15dp"
 			android:hint="@string/choiceTwo" />
 
 		<EditText
 			android:id="@+id/choiceThreeField"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:layout_marginTop="15dp"
 			android:hint="@string/choiceThree" />
 
 		<EditText
 			android:id="@+id/choiceFourField"
-			style="@style/stdEdtTextStyle"
+			style="@style/stdEditTextStyle"
 			android:layout_marginTop="15dp"
 			android:hint="@string/choiceFour" />
 

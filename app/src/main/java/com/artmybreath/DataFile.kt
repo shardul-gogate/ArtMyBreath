@@ -3,6 +3,8 @@ package com.artmybreath
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 class Quiz(val quizTitle: String, val questionCount: Int, val quizBy: String, val quizID: String)
 
@@ -40,7 +42,24 @@ class User(
 	fun getUserID(): String = userID
 }
 
-class Portfolio(val category: String, val subCategory: String, val description: String, val portfolioID: String)
+class Portfolio(
+	val category: String,
+	val subCategory: String,
+	val description: String,
+	val portfolioID: String
+)
+
+class Event(
+	val eventTitle: String,
+	val isBookable: Boolean,
+	val eventCreator: String,
+	val eventBanner: String,
+	val eventDate: Int,
+	val eventMonth: Int,
+	val eventYear: Int,
+	val eventVenue: String,
+	val eventDescription: String
+)
 
 lateinit var currUser: User
 
@@ -86,6 +105,8 @@ const val USER_COLLECTION: String = "users"
 
 const val PORTFOLIO_COLLECTION: String = "portfolios"
 
+const val EVENT_COLLECTION: String = "events"
+
 const val CATEGORY: String = "category"
 
 const val SUB_CATEGORY: String = "subCategory"
@@ -100,3 +121,7 @@ val USER_COLLECTION_REFERENCE: CollectionReference = firebaseFirestore.collectio
 
 val PORTFOLIO_COLLECTION_REFERENCE: CollectionReference =
 	firebaseFirestore.collection(PORTFOLIO_COLLECTION)
+
+val EVENT_COLLECTION_REFERENCE: CollectionReference = firebaseFirestore.collection(EVENT_COLLECTION)
+
+val storageReference: StorageReference = FirebaseStorage.getInstance().getReference("images")

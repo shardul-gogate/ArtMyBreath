@@ -10,7 +10,7 @@
 
 	<EditText
 		android:id="@+id/loginEmailField"
-		style="@style/stdEdtTextStyle"
+		style="@style/stdEditTextStyle"
 		android:layout_marginTop="230dp"
 		android:hint="@string/emailHint"
 		android:inputType="textEmailAddress"
@@ -20,7 +20,7 @@
 
 	<EditText
 		android:id="@+id/loginPasswordField"
-		style="@style/stdEdtTextStyle"
+		style="@style/stdEditTextStyle"
 		android:layout_marginTop="20dp"
 		android:hint="@string/passwordHint"
 		android:inputType="textPassword"

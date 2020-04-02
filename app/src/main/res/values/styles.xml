@@ -8,9 +8,8 @@
 		<item name="colorAccent">@color/orange</item>
 	</style>
 
-	<style name="stdEdtTextStyle" parent="android:Widget.EditText">
+	<style name="stdEditTextStyle" parent="android:Widget.EditText">
 		<item name="android:background">@drawable/round_button</item>
-		<item name="android:textStyle">bold</item>
 		<item name="android:fontFamily">@string/appWideFont</item>
 		<item name="android:textAlignment">center</item>
 		<item name="android:layout_width">330dp</item>
