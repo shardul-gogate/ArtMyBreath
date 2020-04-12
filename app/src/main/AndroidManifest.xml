@@ -14,7 +14,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
-		<activity android:name=".AddEventActivity"></activity>
+		<activity android:name=".SearchActivity"></activity>
+		<activity android:name=".AddEventActivity" />
 		<activity android:name=".EventsActivity" />
 		<activity android:name=".AddPortfolioActivity" />
 		<activity android:name=".ProfileActivity" />

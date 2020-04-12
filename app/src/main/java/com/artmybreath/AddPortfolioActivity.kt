@@ -66,15 +66,21 @@ class AddPortfolioActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
 		createLoadingAlert()
 
-		categorySpinner.adapter =
-			ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories)
+		val categorySpinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories)
+		categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		categorySpinner.adapter = categorySpinnerAdapter
 
 		artistSpinnerAdapter =
 			ArrayAdapter(this, android.R.layout.simple_spinner_item, artistSubCategories)
+		artistSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
 		teacherSpinnerAdapter =
 			ArrayAdapter(this, android.R.layout.simple_spinner_item, teacherSubCategories)
+		teacherSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		
 		sponsorSpinnerAdapter =
 			ArrayAdapter(this, android.R.layout.simple_spinner_item, sponsorSubCategories)
+		sponsorSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 	}
 
 	override fun onBackPressed() {

@@ -78,10 +78,19 @@ class HomeScreen : AppCompatActivity() {
 			logout()
 			true
 		}
+
+		R.id.toolbarSearch -> {
+			search()
+			true
+		}
+
+		/*
 		R.id.toolbarSettings -> {
 			settings()
 			true
 		}
+		*/
+
 		else -> super.onOptionsItemSelected(item)
 	}
 
@@ -151,10 +160,12 @@ class HomeScreen : AppCompatActivity() {
 		Intent(this, QuizListActivity::class.java).also { startActivity(it) }
 	}
 
+	/*
 	private fun settings() {
 		Snackbar.make(homeScreenDrawerLayout, "Settings section coming soon", Snackbar.LENGTH_LONG)
 			.show()
 	}
+	*/
 
 	private fun logout() {
 		val logoutAlert: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -175,12 +186,15 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun artEvents() {
-		Snackbar.make(homeScreenDrawerLayout, "Events section coming soon", Snackbar.LENGTH_LONG)
-			.show()
+		//Snackbar.make(homeScreenDrawerLayout, "Events section coming soon", Snackbar.LENGTH_LONG)
+		//	.show()
+		Intent(this,AddEventActivity::class.java).also { startActivity(it) }
 	}
 
 	private fun artJobs() {
 		Snackbar.make(homeScreenDrawerLayout, "Jobs section coming soon", Snackbar.LENGTH_LONG)
 			.show()
 	}
+
+	private fun search() {}
 }

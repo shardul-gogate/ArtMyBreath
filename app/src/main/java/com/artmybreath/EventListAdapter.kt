@@ -19,7 +19,7 @@ class EventListAdapter(private val cont: Context, private val events: ArrayList<
 		val rowView: View = inflater.inflate(R.layout.layout_quizlist, parent, false)
 		val eventTitle = events[position].eventTitle
 		val eventFullDate =
-			"${events[position].eventDate} - ${events[position].eventMonth} - ${events[position].eventYear}"
+			"${events[position].eventDay} - ${events[position].eventMonth} - ${events[position].eventYear}"
 		val eventVenue = events[position].eventVenue
 		rowView.findViewById<TextView>(R.id.eventTitleLabel).text = eventTitle
 		rowView.findViewById<TextView>(R.id.eventListDateLabel).text = eventFullDate.toString()

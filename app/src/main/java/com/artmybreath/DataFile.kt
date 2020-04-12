@@ -54,7 +54,7 @@ class Event(
 	val isBookable: Boolean,
 	val eventCreator: String,
 	val eventBanner: String,
-	val eventDate: Int,
+	val eventDay: Int,
 	val eventMonth: Int,
 	val eventYear: Int,
 	val eventVenue: String,

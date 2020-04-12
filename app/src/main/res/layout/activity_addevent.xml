@@ -2,29 +2,73 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/eventFormScroll"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/orange"
 	tools:context=".AddEventActivity">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/eventFormConstraint"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
-		<EditText
-			android:id="@+id/eventTitleField"
-			style="@style/stdEditTextStyle"
-			android:layout_marginTop="70dp"
-			android:text="@string/eventTitle"
+		<ImageView
+			android:id="@+id/eventBannerImage"
+			android:layout_width="250dp"
+			android:layout_height="160dp"
+			android:layout_marginTop="40dp"
+			android:scaleType="centerCrop"
+			android:src="@mipmap/ic_default_banner"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 
+		<LinearLayout
+			android:id="@+id/imageActionButtonLinear"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventBannerImage">
+
+			<Button
+				android:id="@+id/removeBannerImage"
+				style="@style/stdButton"
+				android:layout_width="130dp"
+				android:layout_height="40dp"
+				android:text="@string/removeImage"
+				android:textSize="@dimen/smallFont" />
+
+			<Button
+				android:id="@+id/chooseBannerImage"
+				style="@style/stdButton"
+				android:layout_width="130dp"
+				android:layout_height="40dp"
+				android:layout_marginLeft="20dp"
+				android:text="@string/chooseImage"
+				android:textSize="@dimen/smallFont" />
+
+		</LinearLayout>
+
+		<EditText
+			android:id="@+id/eventTitleField"
+			style="@style/stdEditTextStyle"
+			android:layout_marginTop="60dp"
+			android:hint="@string/eventTitle"
+			android:inputType="text"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/imageActionButtonLinear" />
+
 		<EditText
 			android:id="@+id/eventVenueField"
 			style="@style/stdEditTextStyle"
-			android:layout_marginTop="25dp"
-			android:text="@string/eventVenue"
+			android:layout_marginTop="30dp"
+			android:hint="@string/eventVenue"
+			android:inputType="text"
+			app:layout_constraintHorizontal_bias="0.506"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventTitleField" />
@@ -42,13 +86,14 @@
 			android:id="@+id/eventTypeRadioGroup"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="15dp"
+			android:layout_marginTop="10dp"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventTypeLabel">
 
 			<RadioButton
 				android:id="@+id/bookableRadio"
+				android:checked="true"
 				style="@style/stdRadioButton"
 				android:text="@string/bookable" />
 
@@ -73,29 +118,61 @@
 			android:id="@+id/eventFullDateSpinnerLinear"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
 			android:orientation="horizontal"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventDateLabel">
 
 			<Spinner
-				android:id="@+id/eventDateSpinner"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
+				android:id="@+id/eventDaySpinner"
+				android:layout_width="80dp"
+				android:layout_height="35dp" />
 
 			<Spinner
 				android:id="@+id/eventMonthSpinner"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="80dp"
+				android:layout_height="35dp"
 				android:layout_marginLeft="20dp" />
 
 			<Spinner
 				android:id="@+id/eventYearSpinner"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="100dp"
+				android:layout_height="35dp"
 				android:layout_marginLeft="20dp" />
 
 		</LinearLayout>
+
+		<EditText
+			android:id="@+id/eventDescriptionField"
+			style="@style/stdEditTextStyle"
+			android:layout_width="300dp"
+			android:layout_height="160dp"
+			android:layout_marginTop="28dp"
+			android:gravity="top"
+			android:hint="@string/description"
+			android:inputType="textMultiLine"
+			android:paddingStart="10dp"
+			android:scrollHorizontally="false"
+			android:textAlignment="gravity"
+			app:layout_constraintHorizontal_bias="0.495"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventFullDateSpinnerLinear" />
+
+		<Button
+			android:id="@+id/addEventButton"
+			style="@style/stdButton"
+			android:layout_width="150dp"
+			android:layout_marginTop="30dp"
+			android:layout_marginBottom="30dp"
+			android:backgroundTint="@color/darkBlue"
+			android:text="@string/addEvent"
+			android:textColor="@color/white"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventDescriptionField" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 

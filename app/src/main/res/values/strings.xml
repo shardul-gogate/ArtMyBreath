@@ -58,6 +58,11 @@
 	<string name="bookable">Bookable</string>
 	<string name="publishable">Publishable</string>
 	<string name="eventType">Event type</string>
+	<string name="addEvent">Add event</string>
+	<string name="removeImage">Remove image</string>
+	<string name="query">Query</string>
+	<string name="chooseImage">Choose image</string>
+	<string name="searchIn">Search in</string>
 	<dimen name="smallFont">18sp</dimen>
 	<dimen name="standardFont">25sp</dimen>
 	<dimen name="largeFont">30sp</dimen>

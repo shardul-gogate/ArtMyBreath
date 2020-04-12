@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
 	private fun splashScreen() {
 		val splash = thread(start = false) {
-			sleep(1600)
+			sleep(1200)
 			if (firebaseAuth.currentUser == null)
 				Intent(this, LoginActivity::class.java).also { startActivity(it) }
 			else
