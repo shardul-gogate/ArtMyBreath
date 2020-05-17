@@ -9,6 +9,8 @@
 	<string name="confirmPassword">Confirm Password</string>
 	<string name="passwordHint">Enter your password</string>
 	<string name="firstName">First Name</string>
+	<string name="searchResults">Search Results</string>
+	<string name="memberName">Member Name</string>
 	<string name="lastName">Last Name</string>
 	<string name="phoneNumber">Phone Number</string>
 	<string name="memberSignUp"><u>Not a member? Register here!</u></string>
@@ -45,10 +47,12 @@
 	<string name="addPortfolio">Add portfolio</string>
 	<string name="createPortfolio">Create portfolio</string>
 	<string name="portfolios">Portfolios</string>
-	<string name="category">Select category</string>
-	<string name="subCategory">Select sub-category</string>
+	<string name="selectCategory">Select category</string>
+	<string name="selectSubCategory">Select sub-category</string>
+	<string name="category">Category</string>
 	<string name="phoneNumberUpdate">Phone Number:</string>
 	<string name="emailUpdate">Email:</string>
+	<string name="searchBy">Search By</string>
 	<string name="saveChanges">Save Changes</string>
 	<string name="description">Description</string>
 	<string name="search">Search</string>

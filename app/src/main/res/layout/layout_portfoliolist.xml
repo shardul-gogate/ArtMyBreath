@@ -8,7 +8,7 @@
 		style="@style/stdTextStyle"
 		android:layout_marginLeft="15dp"
 		android:layout_marginTop="5dp"
-		android:text="@string/category"
+		android:text="@string/selectCategory"
 		android:textSize="@dimen/standardFont" />
 
 	<TextView
@@ -16,7 +16,7 @@
 		style="@style/stdTextStyle"
 		android:layout_below="@id/portfolioCategory"
 		android:layout_marginLeft="15dp"
-		android:text="@string/subCategory"
+		android:text="@string/selectSubCategory"
 		android:textSize="@dimen/largeFont" />
 
 

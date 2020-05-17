@@ -124,4 +124,4 @@ val PORTFOLIO_COLLECTION_REFERENCE: CollectionReference =
 
 val EVENT_COLLECTION_REFERENCE: CollectionReference = firebaseFirestore.collection(EVENT_COLLECTION)
 
-val storageReference: StorageReference = FirebaseStorage.getInstance().getReference("images")
+val imageStorageReference: StorageReference = FirebaseStorage.getInstance().getReference("images")

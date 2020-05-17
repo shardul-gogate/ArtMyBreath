@@ -196,5 +196,15 @@ class HomeScreen : AppCompatActivity() {
 			.show()
 	}
 
-	private fun search() {}
+	private fun search() {
+		if (firebaseAuth.currentUser!!.isAnonymous) {
+			Snackbar.make(
+				homeScreenDrawerLayout,
+				"Cannot search database when anonymous",
+				Snackbar.LENGTH_LONG
+			).show()
+			return
+		}
+		Intent(this, SearchActivity::class.java).also { startActivity(it) }
+	}
 }

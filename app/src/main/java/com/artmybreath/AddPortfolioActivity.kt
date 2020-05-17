@@ -66,21 +66,7 @@ class AddPortfolioActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 
 		createLoadingAlert()
 
-		val categorySpinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories)
-		categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-		categorySpinner.adapter = categorySpinnerAdapter
-
-		artistSpinnerAdapter =
-			ArrayAdapter(this, android.R.layout.simple_spinner_item, artistSubCategories)
-		artistSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-		teacherSpinnerAdapter =
-			ArrayAdapter(this, android.R.layout.simple_spinner_item, teacherSubCategories)
-		teacherSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-		
-		sponsorSpinnerAdapter =
-			ArrayAdapter(this, android.R.layout.simple_spinner_item, sponsorSubCategories)
-		sponsorSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		setUpSpinnerAdapters()
 	}
 
 	override fun onBackPressed() {
@@ -149,6 +135,24 @@ class AddPortfolioActivity : AppCompatActivity(), AdapterView.OnItemSelectedList
 			Intent(this, ProfileActivity::class.java).also { startActivity(it) }
 			finish()
 		}
+	}
+
+	private fun setUpSpinnerAdapters() {
+		val categorySpinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories)
+		categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		categorySpinner.adapter = categorySpinnerAdapter
+
+		artistSpinnerAdapter =
+			ArrayAdapter(this, android.R.layout.simple_spinner_item, artistSubCategories)
+		artistSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+		teacherSpinnerAdapter =
+			ArrayAdapter(this, android.R.layout.simple_spinner_item, teacherSubCategories)
+		teacherSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+		sponsorSpinnerAdapter =
+			ArrayAdapter(this, android.R.layout.simple_spinner_item, sponsorSubCategories)
+		sponsorSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 	}
 
 	private fun createLoadingAlert() {
