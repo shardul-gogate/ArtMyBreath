@@ -16,14 +16,23 @@ class EventListAdapter(private val cont: Context, private val events: ArrayList<
 	private fun createItemView(position: Int, parent: ViewGroup): View {
 		val inflater: LayoutInflater =
 			cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-		val rowView: View = inflater.inflate(R.layout.layout_quizlist, parent, false)
-		val eventTitle = events[position].eventTitle
+		val rowView: View = inflater.inflate(R.layout.layout_eventlist, parent, false)
+		val eventTitleLabel = rowView.findViewById<TextView>(R.id.eventTitleLabel)
+		val eventListDateLabel = rowView.findViewById<TextView>(R.id.eventListDateLabel)
+		val eventVenueLabel = rowView.findViewById<TextView>(R.id.eventVenueLabel)
+
 		val eventFullDate =
 			"${events[position].eventDay} - ${events[position].eventMonth} - ${events[position].eventYear}"
-		val eventVenue = events[position].eventVenue
-		rowView.findViewById<TextView>(R.id.eventTitleLabel).text = eventTitle
-		rowView.findViewById<TextView>(R.id.eventListDateLabel).text = eventFullDate.toString()
-		rowView.findViewById<TextView>(R.id.eventVenueLabel).text = eventVenue
+
+		eventTitleLabel.text = events[position].eventTitle
+
+		if (!events[position].isBookable) {
+			eventListDateLabel.text = eventFullDate
+			eventVenueLabel.text = events[position].eventVenue
+		} else {
+			eventListDateLabel.text = events[position].eventCreatorName
+			eventVenueLabel.visibility = View.GONE
+		}
 		return rowView
 	}
 }

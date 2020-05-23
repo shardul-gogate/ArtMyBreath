@@ -10,6 +10,7 @@
 		android:layout_height="130dp"
 		android:layout_marginLeft="10dp"
 		android:layout_marginTop="10dp"
+		android:layout_marginBottom="10dp"
 		android:background="@color/darkBlue" />
 
 	<TextView
@@ -40,6 +41,7 @@
 	<TextView
 		android:id="@+id/eventVenueLabel"
 		style="@style/stdTextStyle"
+		android:textSize="@dimen/smallFont"
 		android:layout_below="@id/eventListDateLabel"
 		android:layout_marginLeft="15dp"
 		android:layout_marginTop="5dp"

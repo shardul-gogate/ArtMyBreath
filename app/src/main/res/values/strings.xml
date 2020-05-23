@@ -41,8 +41,9 @@
 	<string name="artBlog">Art Blog</string>
 	<string name="artJobs">Art Jobs</string>
 	<string name="anonLogin"><u>Continue anonymously</u></string>
+	<string name="guestUser">Guest User</string>
 	<string name="loading">Loading . . . </string>
-	<string name="fullName">Full name:</string>
+	<string name="fullName">Full name</string>
 	<string name="updateProfile">Update profile</string>
 	<string name="addPortfolio">Add portfolio</string>
 	<string name="createPortfolio">Create portfolio</string>
@@ -50,8 +51,8 @@
 	<string name="selectCategory">Select category</string>
 	<string name="selectSubCategory">Select sub-category</string>
 	<string name="category">Category</string>
-	<string name="phoneNumberUpdate">Phone Number:</string>
-	<string name="emailUpdate">Email:</string>
+	<string name="phoneNumberUpdate">Phone Number</string>
+	<string name="emailUpdate">Email</string>
 	<string name="searchBy">Search By</string>
 	<string name="saveChanges">Save Changes</string>
 	<string name="description">Description</string>
@@ -59,6 +60,7 @@
 	<string name="eventTitle">Event title</string>
 	<string name="eventVenue">Event venue</string>
 	<string name="eventDate">Event date</string>
+	<string name="eventTime">Event time</string>
 	<string name="bookable">Bookable</string>
 	<string name="publishable">Publishable</string>
 	<string name="eventType">Event type</string>

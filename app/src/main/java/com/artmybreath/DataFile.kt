@@ -51,13 +51,15 @@ class Portfolio(
 
 class Event(
 	val eventTitle: String,
-	val isBookable: Boolean,
-	val eventCreator: String,
-	val eventBanner: String,
-	val eventDay: Int,
-	val eventMonth: Int,
-	val eventYear: Int,
 	val eventVenue: String,
+	val isBookable: Boolean,
+	val eventCreatorID: String,
+	val eventCreatorName: String,
+	val eventDay: Int,
+	val eventMonth: String,
+	val eventYear: Int,
+	val eventHour: Int,
+	val eventMinute: Int,
 	val eventDescription: String
 )
 
@@ -114,6 +116,26 @@ const val SUB_CATEGORY: String = "subCategory"
 const val DESCRIPTION: String = "description"
 
 const val PORTFOLIO_OF: String = "portfolioOf"
+
+const val EVENT_TITLE: String = "eventTitle"
+
+const val EVENT_VENUE: String = "eventVenue"
+
+const val EVENT_DAY: String = "eventDay"
+
+const val EVENT_MONTH: String = "eventMonth"
+
+const val EVENT_YEAR: String = "eventYEAR"
+
+const val EVENT_HOUR: String = "eventHour"
+
+const val EVENT_MINUTE: String = "eventMinute"
+
+const val EVENT_BOOKABLE: String = "isBookable"
+
+const val EVENT_CREATOR: String = "eventCreator"
+
+const val EVENT_DESCRIPTION: String = "eventDescription"
 
 val QUIZ_COLLECTION_REFERENCE: CollectionReference = firebaseFirestore.collection(QUIZ_COLLECTION)
 

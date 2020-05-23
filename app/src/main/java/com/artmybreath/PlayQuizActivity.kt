@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.android.synthetic.main.activity_playquiz.*
 
@@ -65,6 +66,9 @@ class PlayQuizActivity : AppCompatActivity() {
 			}
 			hideLoadingAlert()
 			showFirstQuestion()
+		}.addOnFailureListener {
+			Snackbar.make(playQuizActivityLayout,"Could not load questions. Try again later",Snackbar.LENGTH_LONG).show()
+			hideLoadingAlert()
 		}
 	}
 

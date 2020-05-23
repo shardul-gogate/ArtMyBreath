@@ -11,10 +11,13 @@
 	<TextView
 		android:id="@+id/selectCategoryLabel"
 		style="@style/stdTextStyle"
+		android:layout_width="match_parent"
 		android:layout_marginTop="80dp"
+		android:background="@color/yellow"
 		android:scrollHorizontally="false"
 		android:text="@string/selectCategory"
-		android:textColor="@color/white"
+		android:textAlignment="center"
+		android:textColor="@color/black"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +34,12 @@
 	<TextView
 		android:id="@+id/selectSubCategoryLabel"
 		style="@style/stdTextStyle"
+		android:layout_width="match_parent"
 		android:layout_marginTop="30dp"
+		android:background="@color/yellow"
 		android:text="@string/selectSubCategory"
-		android:textColor="@color/white"
+		android:textAlignment="center"
+		android:textColor="@color/black"
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
 		app:layout_constraintTop_toBottomOf="@id/categorySpinner" />

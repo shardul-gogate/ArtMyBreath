@@ -13,6 +13,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 
+		<!--
 		<ImageView
 			android:id="@+id/eventBannerImage"
 			android:layout_width="250dp"
@@ -51,6 +52,7 @@
 				android:textSize="@dimen/smallFont" />
 
 		</LinearLayout>
+		-->
 
 		<EditText
 			android:id="@+id/eventTitleField"
@@ -60,7 +62,7 @@
 			android:inputType="text"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/imageActionButtonLinear" />
+			app:layout_constraintTop_toTopOf="parent" />
 
 		<EditText
 			android:id="@+id/eventVenueField"
@@ -76,8 +78,12 @@
 		<TextView
 			android:id="@+id/eventTypeLabel"
 			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
 			android:layout_marginTop="30dp"
+			android:background="@color/darkBlue"
 			android:text="@string/eventType"
+			android:textAlignment="center"
+			android:textColor="@color/white"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventVenueField" />
@@ -93,7 +99,6 @@
 
 			<RadioButton
 				android:id="@+id/bookableRadio"
-				android:checked="true"
 				style="@style/stdRadioButton"
 				android:text="@string/bookable" />
 
@@ -108,40 +113,50 @@
 		<TextView
 			android:id="@+id/eventDateLabel"
 			style="@style/stdTextStyle"
-			android:layout_marginTop="30dp"
+			android:layout_width="match_parent"
+			android:layout_marginTop="20dp"
+			android:background="@color/darkBlue"
 			android:text="@string/eventDate"
+			android:textAlignment="center"
+			android:textColor="@color/white"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventTypeRadioGroup" />
 
-		<LinearLayout
-			android:id="@+id/eventFullDateSpinnerLinear"
+		<DatePicker
+			android:id="@+id/eventFullDatePicker"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="10dp"
-			android:orientation="horizontal"
+			android:layout_marginTop="5dp"
+			android:calendarTextColor="@color/black"
+			android:calendarViewShown="false"
+			android:datePickerMode="spinner"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/eventDateLabel">
+			app:layout_constraintTop_toBottomOf="@id/eventDateLabel" />
 
-			<Spinner
-				android:id="@+id/eventDaySpinner"
-				android:layout_width="80dp"
-				android:layout_height="35dp" />
+		<TextView
+			android:id="@+id/eventTimeLabel"
+			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
+			android:layout_marginTop="20dp"
+			android:background="@color/darkBlue"
+			android:text="@string/eventTime"
+			android:textAlignment="center"
+			android:textColor="@color/white"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventFullDatePicker" />
 
-			<Spinner
-				android:id="@+id/eventMonthSpinner"
-				android:layout_width="80dp"
-				android:layout_height="35dp"
-				android:layout_marginLeft="20dp" />
-
-			<Spinner
-				android:id="@+id/eventYearSpinner"
-				android:layout_width="100dp"
-				android:layout_height="35dp"
-				android:layout_marginLeft="20dp" />
-
-		</LinearLayout>
+		<TimePicker
+			android:id="@+id/eventTimePicker"
+			app:layout_constraintLeft_toLeftOf="parent"
+			android:layout_marginTop="5dp"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/eventTimeLabel"
+			android:timePickerMode="spinner"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
 
 		<EditText
 			android:id="@+id/eventDescriptionField"
@@ -158,7 +173,7 @@
 			app:layout_constraintHorizontal_bias="0.495"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/eventFullDateSpinnerLinear" />
+			app:layout_constraintTop_toBottomOf="@id/eventTimePicker" />
 
 		<Button
 			android:id="@+id/addEventButton"

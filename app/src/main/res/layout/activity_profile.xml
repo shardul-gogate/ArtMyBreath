@@ -15,7 +15,7 @@
 
 		<LinearLayout
 			android:id="@+id/fullNameLinear"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="30dp"
 			android:orientation="vertical"
@@ -26,8 +26,12 @@
 			<TextView
 				android:id="@+id/profileNameLabel"
 				style="@style/stdTextStyle"
+				android:layout_width="match_parent"
 				android:layout_gravity="center"
-				android:text="@string/fullName" />
+				android:background="@color/darkBlue"
+				android:text="@string/fullName"
+				android:textAlignment="center"
+				android:textColor="@color/white" />
 
 			<TextView
 				android:id="@+id/profileNameField"
@@ -39,7 +43,7 @@
 
 		<LinearLayout
 			android:id="@+id/emailLinear"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="20dp"
 			android:orientation="vertical"
@@ -50,19 +54,24 @@
 			<TextView
 				android:id="@+id/profileEmailLabel"
 				style="@style/stdTextStyle"
+				android:layout_width="match_parent"
 				android:layout_gravity="center"
-				android:text="@string/emailUpdate" />
+				android:background="@color/darkBlue"
+				android:text="@string/emailUpdate"
+				android:textAlignment="center"
+				android:textColor="@color/white" />
 
 			<TextView
 				android:id="@+id/profileEmailField"
 				style="@style/stdTextStyle"
+				android:layout_gravity="center"
 				android:text="@string/emailHint" />
 
 		</LinearLayout>
 
 		<LinearLayout
 			android:id="@+id/phoneNumberLinear"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="20dp"
 			android:orientation="vertical"
@@ -73,8 +82,12 @@
 			<TextView
 				android:id="@+id/profilePhoneLabel"
 				style="@style/stdTextStyle"
+				android:layout_width="match_parent"
 				android:layout_gravity="center"
-				android:text="@string/phoneNumberUpdate" />
+				android:background="@color/darkBlue"
+				android:text="@string/phoneNumberUpdate"
+				android:textAlignment="center"
+				android:textColor="@color/white" />
 
 			<TextView
 				android:id="@+id/profilePhoneField"
@@ -97,8 +110,12 @@
 		<TextView
 			android:id="@+id/portfoliosLabel"
 			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
 			android:layout_marginTop="30dp"
+			android:background="@color/darkBlue"
 			android:text="@string/portfolios"
+			android:textAlignment="center"
+			android:textColor="@color/white"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/updateProfileButton" />

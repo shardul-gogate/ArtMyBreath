@@ -2,21 +2,26 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/searchActivityLayout"
+	android:id="@+id/searchActivityScroll"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="@color/red"
 	tools:context=".SearchActivity">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/searchActivityConstraint"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
 		<TextView
 			android:id="@+id/searchInLabel"
 			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
 			android:layout_marginTop="30dp"
+			android:background="@color/yellow"
 			android:text="@string/searchIn"
+			android:textAlignment="center"
+			android:textColor="@color/black"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
@@ -45,8 +50,12 @@
 		<TextView
 			android:id="@+id/searchByLabel"
 			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
 			android:layout_marginTop="30dp"
+			android:background="@color/yellow"
 			android:text="@string/searchBy"
+			android:textAlignment="center"
+			android:textColor="@color/black"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/searchInRadio" />
@@ -87,7 +96,8 @@
 				android:hint="@string/firstName"
 				android:inputType="text"
 				app:layout_constraintLeft_toLeftOf="parent"
-				app:layout_constraintRight_toRightOf="parent" />
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
 
 			<EditText
 				android:id="@+id/searchLastName"
@@ -104,7 +114,7 @@
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:id="@+id/searchSpinnerConstraint"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="30dp"
 			app:layout_constraintLeft_toLeftOf="parent"
@@ -114,8 +124,12 @@
 			<TextView
 				android:id="@+id/searchCategoryLabel"
 				style="@style/stdTextStyle"
+				android:layout_width="match_parent"
+				android:background="@color/yellow"
 				android:scrollHorizontally="false"
 				android:text="@string/selectCategory"
+				android:textAlignment="center"
+				android:textColor="@color/black"
 				app:layout_constraintLeft_toLeftOf="parent"
 				app:layout_constraintRight_toRightOf="parent"
 				app:layout_constraintTop_toTopOf="parent" />
@@ -132,8 +146,12 @@
 			<TextView
 				android:id="@+id/searchSubCategoryLabel"
 				style="@style/stdTextStyle"
+				android:layout_width="match_parent"
 				android:layout_marginTop="20dp"
+				android:background="@color/yellow"
 				android:text="@string/selectSubCategory"
+				android:textAlignment="center"
+				android:textColor="@color/black"
 				app:layout_constraintLeft_toLeftOf="parent"
 				app:layout_constraintRight_toRightOf="parent"
 				app:layout_constraintTop_toBottomOf="@id/searchCategorySpinner" />
@@ -162,8 +180,12 @@
 		<TextView
 			android:id="@+id/searchResultsLabel"
 			style="@style/stdTextStyle"
+			android:layout_width="match_parent"
 			android:layout_marginTop="30dp"
+			android:background="@color/yellow"
 			android:text="@string/searchResults"
+			android:textAlignment="center"
+			android:textColor="@color/black"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/searchButton" />

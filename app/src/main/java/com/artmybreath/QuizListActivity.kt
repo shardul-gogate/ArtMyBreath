@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_quizlist.*
 
 class QuizListActivity : Activity(), AdapterView.OnItemClickListener {
@@ -58,6 +59,10 @@ class QuizListActivity : Activity(), AdapterView.OnItemClickListener {
 				}
 			}
 			hideProgressBar()
+		}.addOnFailureListener {
+			hideProgressBar()
+			Toast.makeText(this,"Could not load quizzes, Try again later",Toast.LENGTH_SHORT).show()
+			finish()
 		}
 	}
 

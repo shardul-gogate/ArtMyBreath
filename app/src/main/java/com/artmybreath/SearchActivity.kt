@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
@@ -84,6 +86,10 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 		USER_COLLECTION_REFERENCE.whereEqualTo(FIRST_NAME, searchFirstName)
 			.whereEqualTo(LAST_NAME, searchLastName).get().addOnSuccessListener {
 				hideLoadingAlert()
+				if(it.isEmpty) {
+					Toast.makeText(this,"No matching results found",Toast.LENGTH_SHORT).show()
+					return@addOnSuccessListener
+				}
 				for (userFound in it) {
 					searchResultIDs.add(userFound.id)
 					searchResultNames.add("$searchFirstName $searchLastName")
@@ -94,6 +100,9 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 					searchResultNames
 				)
 				searchResultsList.adapter = searchListAdapter
+			}.addOnFailureListener {
+				Toast.makeText(this,"Something went wrong. Try later",Toast.LENGTH_SHORT).show()
+				hideLoadingAlert()
 			}
 	}
 
@@ -106,6 +115,10 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 		PORTFOLIO_COLLECTION_REFERENCE.whereEqualTo(CATEGORY, searchCategory)
 			.whereEqualTo(SUB_CATEGORY, searchSubCategory).get().addOnSuccessListener {
 				hideLoadingAlert()
+				if(it.isEmpty) {
+					Toast.makeText(this,"No matching results found",Toast.LENGTH_SHORT).show()
+					return@addOnSuccessListener
+				}
 				for (userFound in it) {
 					val userID = userFound[PORTFOLIO_OF] as String
 					searchResultIDs.add(userID)
@@ -123,6 +136,9 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 							searchResultsList.onItemClickListener = this
 						}
 				}
+			}.addOnFailureListener {
+				Toast.makeText(this,"Something went wrong. Try later",Toast.LENGTH_SHORT).show()
+				hideLoadingAlert()
 			}
 	}
 
@@ -135,19 +151,22 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 	}
 
 	override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-		val userID = searchResultIDs[position]
 		showLoadingAlert()
+		val userID = searchResultIDs[position]
 		USER_COLLECTION_REFERENCE.document(userID).get().addOnSuccessListener {
-			val firstName = it[FIRST_NAME]
-			val lastName = it[LAST_NAME]
-			val email = it[EMAIL]
-			val phoneNumber = it[PHONE_NUMBER]
+			hideLoadingAlert()
+			val firstName = it[FIRST_NAME] as String
+			val lastName = it[LAST_NAME] as String
+			val email = it[EMAIL] as String
+			val phoneNumber = it[PHONE_NUMBER] as String
 			val searchResultDialog = AlertDialog.Builder(this)
 			searchResultDialog.setTitle("$firstName $lastName")
 			searchResultDialog.setMessage("$email\n$phoneNumber")
 			searchResultDialog.setNeutralButton("Ok") { _, _ -> }
-			hideLoadingAlert()
 			searchResultDialog.show()
+		}.addOnFailureListener {
+			Toast.makeText(this,"Something went wrong. Try later",Toast.LENGTH_SHORT).show()
+			hideLoadingAlert()
 		}
 	}
 
@@ -189,6 +208,7 @@ class SearchActivity : Activity(), AdapterView.OnItemSelectedListener,
 	}
 
 	override fun onNothingSelected(parent: AdapterView<*>?) {
+		Toast.makeText(this,"Select category to search",Toast.LENGTH_SHORT).show()
 		return
 	}
 

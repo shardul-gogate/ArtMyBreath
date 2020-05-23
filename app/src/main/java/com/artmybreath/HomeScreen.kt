@@ -186,9 +186,8 @@ class HomeScreen : AppCompatActivity() {
 	}
 
 	private fun artEvents() {
-		//Snackbar.make(homeScreenDrawerLayout, "Events section coming soon", Snackbar.LENGTH_LONG)
-		//	.show()
-		Intent(this,AddEventActivity::class.java).also { startActivity(it) }
+		//Snackbar.make(homeScreenDrawerLayout, "Events section coming soon", Snackbar.LENGTH_LONG).show()
+		Intent(this,EventsActivity::class.java).also { startActivity(it) }
 	}
 
 	private fun artJobs() {
