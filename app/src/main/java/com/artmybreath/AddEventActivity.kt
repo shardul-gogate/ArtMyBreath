@@ -27,7 +27,7 @@ class AddEventActivity : AppCompatActivity() {
 		exitAlertDialog.setTitle("Confirm exit")
 		exitAlertDialog.setMessage("Do you want to exit event creation?")
 		exitAlertDialog.setPositiveButton("Yes") { _, _ ->
-			Intent(this,EventsActivity::class.java).also { startActivity(it) }
+			Intent(this,HomeScreen::class.java).also { startActivity(it) }
 			finish()
 		}
 		exitAlertDialog.setNegativeButton("No") { _, _ -> }
@@ -49,12 +49,13 @@ class AddEventActivity : AppCompatActivity() {
 		if (!isBookable) {
 			eventVenue = eventVenueField.text.toString()
 			eventDay = eventFullDatePicker.dayOfMonth
-			eventMonth = eventFullDatePicker.month
+			eventMonth = eventFullDatePicker.month + 1
 			eventYear = eventFullDatePicker.year
 			eventHour = eventTimePicker.hour
 			eventMinute = eventTimePicker.minute
 
 			if (eventVenue.isEmpty()) {
+				hideLoadingAlert()
 				Snackbar.make(eventFormConstraint, "Some fields are empty", Snackbar.LENGTH_LONG)
 					.show()
 				return
@@ -82,10 +83,12 @@ class AddEventActivity : AppCompatActivity() {
 		EVENT_COLLECTION_REFERENCE.document().set(eventMap).addOnSuccessListener {
 			hideLoadingAlert()
 			Toast.makeText(this,"Event has been successfully created",Toast.LENGTH_SHORT).show()
+			Intent(this,HomeScreen::class.java).also { startActivity(it) }
 			finish()
 		}.addOnFailureListener {
 			hideLoadingAlert()
 			Toast.makeText(this,"Event couldn't be added. Something went wrong",Toast.LENGTH_SHORT).show()
+			Intent(this,HomeScreen::class.java).also { startActivity(it) }
 			finish()
 		}
 	}
@@ -93,8 +96,6 @@ class AddEventActivity : AppCompatActivity() {
 	private fun setListeners() {
 		addEventButton.setOnClickListener {
 			addEvent()
-			Intent(this,EventsActivity::class.java).also { startActivity(it) }
-			finish()
 		}
 
 		bookableRadio.setOnClickListener { hidePublishableFields() }

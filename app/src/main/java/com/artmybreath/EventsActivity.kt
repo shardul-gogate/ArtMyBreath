@@ -1,16 +1,15 @@
 package com.artmybreath
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.activity_events.*
 
-class EventsActivity : Activity(), AdapterView.OnItemClickListener {
+class EventsActivity : Activity(), AdapterView.OnItemClickListener,
+	AdapterView.OnItemLongClickListener {
 
 	private lateinit var eventAdapter: EventListAdapter
 	private lateinit var eventList: ListView
@@ -27,20 +26,55 @@ class EventsActivity : Activity(), AdapterView.OnItemClickListener {
 		eventList = findViewById(R.id.eventList)
 
 		getAllEvents()
-
-		addEventActionButton.setOnClickListener {
-			Intent(this,AddEventActivity::class.java).also { startActivity(it) }
-			finish()
-		}
 	}
 
-	override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
+	override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+		var eventMessage = "${events[position].eventDescription}\n"
+		if (!events[position].isBookable) {
+			eventMessage += "Venue: ${events[position].eventVenue}\nDate: ${events[position].eventDay} - ${events[position].eventMonth} - ${events[position].eventYear}\nTime: ${events[position].eventHour}:${events[position].eventMinute} hours\n"
+		}
+		eventMessage += events[position].eventCreatorName
+		val eventDetailsDialog = AlertDialog.Builder(this)
+		eventDetailsDialog.setTitle(events[position].eventTitle)
+		eventDetailsDialog.setMessage(eventMessage)
+		eventDetailsDialog.setCancelable(false)
+		eventDetailsDialog.setNeutralButton("Ok") { _, _ -> }
+		eventDetailsDialog.show()
+	}
+
+	override fun onItemLongClick(
+		parent: AdapterView<*>?,
+		view: View?,
+		position: Int,
+		id: Long
+	): Boolean {
+		if (events[position].eventCreatorID != currUser.getUserID())
+			return true
+		val confirmDeleteDialog = AlertDialog.Builder(this)
+		confirmDeleteDialog.setTitle("Confirm deletion")
+		confirmDeleteDialog.setMessage("Are you sure you want to delete this event?\nThis action cannot be undone")
+		confirmDeleteDialog.setNegativeButton("No") { _, _ -> }
+		confirmDeleteDialog.setPositiveButton("Yes") { _, _ ->
+			showLoadingAlert()
+			EVENT_COLLECTION_REFERENCE.document(events[position].eventID).delete().addOnSuccessListener {
+				hideLoadingAlert()
+				Toast.makeText(this,"Event deleted from database",Toast.LENGTH_SHORT).show()
+				events.removeAt(position)
+				eventAdapter.notifyDataSetChanged()
+			}.addOnFailureListener {
+				Toast.makeText(this,"Something went wrong. Try again later",Toast.LENGTH_SHORT).show()
+			}
+		}
+		confirmDeleteDialog.show()
+		return true
+	}
 
 	private fun getAllEvents() {
 		showLoadingAlert()
 
 		EVENT_COLLECTION_REFERENCE.get().addOnSuccessListener {
 			for (eventReference in it) {
+				val eventID = eventReference.id
 				val eventTitle = eventReference[EVENT_TITLE] as String
 				val isBookable = eventReference[EVENT_BOOKABLE] as Boolean
 				val eventVenue = eventReference[EVENT_VENUE] as String
@@ -70,9 +104,11 @@ class EventsActivity : Activity(), AdapterView.OnItemClickListener {
 
 				USER_COLLECTION_REFERENCE.document(eventCreatorID).get()
 					.addOnSuccessListener { userFound ->
-						eventCreatorName = (userFound[FIRST_NAME] as String) + (userFound[LAST_NAME] as String)
+						eventCreatorName =
+							"${userFound[FIRST_NAME] as String} ${userFound[LAST_NAME] as String}"
 
 						val newEvent = Event(
+							eventID,
 							eventTitle,
 							eventVenue,
 							isBookable,
@@ -91,6 +127,7 @@ class EventsActivity : Activity(), AdapterView.OnItemClickListener {
 						eventList.adapter = eventAdapter
 						eventList.isClickable = true
 						eventList.onItemClickListener = this
+						eventList.onItemLongClickListener = this
 					}.addOnFailureListener {
 						hideLoadingAlert()
 						Toast.makeText(this, "Error loading events", Toast.LENGTH_SHORT).show()

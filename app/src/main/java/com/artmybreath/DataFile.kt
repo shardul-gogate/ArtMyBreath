@@ -50,6 +50,7 @@ class Portfolio(
 )
 
 class Event(
+	val eventID: String,
 	val eventTitle: String,
 	val eventVenue: String,
 	val isBookable: Boolean,
@@ -136,6 +137,8 @@ const val EVENT_BOOKABLE: String = "isBookable"
 const val EVENT_CREATOR: String = "eventCreator"
 
 const val EVENT_DESCRIPTION: String = "eventDescription"
+
+const val USER_REQUESTED: String = "userRequested"
 
 val QUIZ_COLLECTION_REFERENCE: CollectionReference = firebaseFirestore.collection(QUIZ_COLLECTION)
 

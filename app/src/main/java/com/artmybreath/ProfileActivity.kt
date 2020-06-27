@@ -21,9 +21,20 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 
 	private lateinit var loadingAlertDialog: AlertDialog
 
+	private var givenUserID = ""
+	private var userForDisplay: User = currUser
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_profile)
+
+		val extras = intent.extras
+		if (extras != null) {
+			givenUserID = extras.getString(USER_REQUESTED).toString()
+		}
+
+		if (givenUserID != currUser.getUserID())
+			hideUpdateButtons()
 
 		createLoadingAlert()
 
@@ -32,6 +43,7 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 		setListeners()
 
 		portfolioList = findViewById(R.id.portfoliosList)
+
 		getUserPortfolios()
 	}
 
@@ -59,7 +71,7 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 
 	private fun getUserPortfolios() {
 		showLoadingAlert()
-		PORTFOLIO_COLLECTION_REFERENCE.whereEqualTo(PORTFOLIO_OF, currUser.getUserID()).get()
+		PORTFOLIO_COLLECTION_REFERENCE.whereEqualTo(PORTFOLIO_OF, givenUserID).get()
 			.addOnSuccessListener {
 				for (userPortfolio in it) {
 					val category = userPortfolio[CATEGORY] as String
@@ -107,9 +119,20 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 	}
 
 	private fun setUserProfile() {
-		profileNameField.text = "${currUser.getFirstName()} ${currUser.getLastName()}"
-		profileEmailField.text = currUser.getEmail()
-		profilePhoneField.text = currUser.getPhone()
+		USER_COLLECTION_REFERENCE.document(givenUserID).get().addOnSuccessListener {
+			userForDisplay =
+				User(
+					it[FIRST_NAME] as String,
+					it[LAST_NAME] as String,
+					givenUserID,
+					it[EMAIL] as String,
+					it[PHONE_NUMBER] as String
+				)
+
+			profileNameField.text = "${userForDisplay.getFirstName()} ${userForDisplay.getLastName()}"
+			profileEmailField.text = userForDisplay.getEmail()
+			profilePhoneField.text = userForDisplay.getPhone()
+		}
 	}
 
 	private fun setListeners() {
@@ -129,6 +152,11 @@ class ProfileActivity : Activity(), AdapterView.OnItemClickListener {
 			Intent(this, AddPortfolioActivity::class.java).also { startActivity(it) }
 			finish()
 		}
+	}
+
+	private fun hideUpdateButtons() {
+		updateProfileButton.visibility = View.GONE
+		createPortfolioActionButton.visibility = View.GONE
 	}
 
 	private fun fadeInProfile() {

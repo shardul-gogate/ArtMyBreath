@@ -71,4 +71,15 @@
 		<item name="android:buttonTint">@color/darkPurple</item>
 	</style>
 
+	<style name="gridButton" parent="android:Widget.Button">
+		<item name="android:layout_width">165dp</item>
+		<item name="android:layout_height">80dp</item>
+		<item name="android:includeFontPadding">false</item>
+		<item name="android:textColor">@color/black</item>
+		<item name="android:background">@drawable/round_button</item>
+		<item name="android:fontFamily">@string/appWideFont</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:textSize">@dimen/standardButton</item>
+	</style>
+
 </resources>

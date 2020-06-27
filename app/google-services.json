@@ -8,9 +8,46 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:164774143691:android:d6967d55e9c14d2f5d1d4e",
+        "mobilesdk_app_id": "1:164774143691:android:22b702e46057f6385d1d4e",
         "android_client_info": {
           "package_name": "com.artmybreath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164774143691-2dl64k8ssll4oof2qbmollqtgkurglpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.artmybreath",
+            "certificate_hash": "87674db48e4d6b9f0e7137b812462b2a76ed960b"
+          }
+        },
+        {
+          "client_id": "164774143691-sbogrhl56spftv1t46g239m9g27hh3ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX2lrAD266-fCfXrTKvP_ow5stf2pqLM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164774143691-sbogrhl56spftv1t46g239m9g27hh3ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164774143691:android:d6967d55e9c14d2f5d1d4e",
+        "android_client_info": {
+          "package_name": "com.shardul.artmybreath"
         }
       },
       "oauth_client": [
@@ -18,7 +55,7 @@
           "client_id": "164774143691-n013h4ef5butcaddm82f8q97oaviskgg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.artmybreath",
+            "package_name": "com.shardul.artmybreath",
             "certificate_hash": "3848682afeabd366349d42470009d7c3a1b99f9b"
           }
         },

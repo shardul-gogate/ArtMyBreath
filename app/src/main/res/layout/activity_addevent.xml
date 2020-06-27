@@ -131,6 +131,7 @@
 			android:calendarTextColor="@color/black"
 			android:calendarViewShown="false"
 			android:datePickerMode="spinner"
+			app:layout_constraintHorizontal_bias="0.496"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toBottomOf="@id/eventDateLabel" />

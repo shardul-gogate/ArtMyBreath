@@ -2,15 +2,8 @@ package com.artmybreath
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_homescreen.*
 
@@ -19,18 +12,6 @@ class HomeScreen : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_homescreen)
-
-		setSupportActionBar(homeScreenToolbar)
-		val drawerToggle = ActionBarDrawerToggle(
-			this,
-			homeScreenDrawerLayout,
-			homeScreenToolbar,
-			R.string.navigationDrawerOpen,
-			R.string.navigationDrawerClose
-		)
-		homeScreenDrawerLayout.addDrawerListener(drawerToggle)
-		drawerToggle.isDrawerIndicatorEnabled = true
-		drawerToggle.syncState()
 
 		getCurrentUserInfo()
 
@@ -52,102 +33,67 @@ class HomeScreen : AppCompatActivity() {
 							firebaseAuth.currentUser!!.email.toString(),
 							userDoc.get(PHONE_NUMBER) as String
 						)
-						val navigationHeader = homeScreenDrawer.getHeaderView(0)
-						navigationHeader.findViewById<LinearLayout>(R.id.navigationDrawerProfile)
-							.findViewById<TextView>(R.id.navigationHeaderUsername).text =
+						yourProfileButton.text =
 							"${currUser.getFirstName()} ${currUser.getLastName()}"
 					}
 				}
 			}
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-		menuInflater.inflate(R.menu.toolbar_menu, menu)
-		return true
-	}
-
 	override fun onBackPressed() {
-		if (homeScreenDrawerLayout.isDrawerOpen(GravityCompat.START))
-			homeScreenDrawerLayout.closeDrawers()
-		else
-			logout()
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-		R.id.toolbarLogout -> {
-			logout()
-			true
-		}
-
-		R.id.toolbarSearch -> {
-			search()
-			true
-		}
-
-		/*
-		R.id.toolbarSettings -> {
-			settings()
-			true
-		}
-		*/
-
-		else -> super.onOptionsItemSelected(item)
+		logout()
 	}
 
 	private fun setListeners() {
-		val navigationView = findViewById<NavigationView>(R.id.homeScreenDrawer)
-		val navigationHeader = navigationView.getHeaderView(0)
-		val headerProfile =
-			navigationHeader.findViewById<LinearLayout>(R.id.navigationDrawerProfile)
-		headerProfile.setOnClickListener {
-			homeScreenDrawerLayout.closeDrawers()
-			openProfile()
-		}
+		yourProfileButton.setOnClickListener { openProfile() }
 
-		navigationView.setNavigationItemSelectedListener {
-			homeScreenDrawerLayout.closeDrawers()
-			when (it.itemId) {
-				R.id.playQuizNavigation -> {
-					playQuiz()
-					true
-				}
-				R.id.createQuizNavigation -> {
-					createQuiz()
-					true
-				}
-				R.id.artBlogNavigation -> {
-					artBlog()
-					true
-				}
-				R.id.artEventsNavigation -> {
-					artEvents()
-					true
-				}
-				R.id.artJobsNavigation -> {
-					artJobs()
-					true
-				}
-				else -> true
-			}
-		}
+		homeScreenSearchButton.setOnClickListener { search() }
+
+		addEventsButton.setOnClickListener { addEvent() }
+
+		openEventsButton.setOnClickListener { artEvents() }
+
+		playQuizButton.setOnClickListener { playQuiz() }
+
+		createQuizButton.setOnClickListener { createQuiz() }
+
+		logoutButton.setOnClickListener { logout() }
 	}
 
-	private fun openProfile() {
+	private fun addEvent() {
 		if (firebaseAuth.currentUser!!.isAnonymous) {
 			Snackbar.make(
-				homeScreenDrawerLayout,
+				homeScreenLayout,
 				"Cannot open profile when anonymous",
 				Snackbar.LENGTH_LONG
 			).show()
 			return
 		}
-		Intent(this, ProfileActivity::class.java).also { startActivity(it) }
+		Intent(
+			this,
+			AddEventActivity::class.java
+		).also { startActivity(it) }
+	}
+
+	private fun openProfile() {
+		if (firebaseAuth.currentUser!!.isAnonymous) {
+			Snackbar.make(
+				homeScreenLayout,
+				"Cannot open profile when anonymous",
+				Snackbar.LENGTH_LONG
+			).show()
+			return
+		}
+		Intent(this, ProfileActivity::class.java).also {
+			it.putExtra(USER_REQUESTED, currUser.getUserID())
+			startActivity(it)
+		}
 	}
 
 	private fun createQuiz() {
 		if (firebaseAuth.currentUser!!.isAnonymous) {
 			Snackbar.make(
-				homeScreenDrawerLayout,
+				homeScreenLayout,
 				"Cannot create quiz when anonymous",
 				Snackbar.LENGTH_LONG
 			).show()
@@ -159,13 +105,6 @@ class HomeScreen : AppCompatActivity() {
 	private fun playQuiz() {
 		Intent(this, QuizListActivity::class.java).also { startActivity(it) }
 	}
-
-	/*
-	private fun settings() {
-		Snackbar.make(homeScreenDrawerLayout, "Settings section coming soon", Snackbar.LENGTH_LONG)
-			.show()
-	}
-	*/
 
 	private fun logout() {
 		val logoutAlert: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -180,25 +119,14 @@ class HomeScreen : AppCompatActivity() {
 		logoutAlert.show()
 	}
 
-	private fun artBlog() {
-		Snackbar.make(homeScreenDrawerLayout, "Blog section coming soon", Snackbar.LENGTH_LONG)
-			.show()
-	}
-
 	private fun artEvents() {
-		//Snackbar.make(homeScreenDrawerLayout, "Events section coming soon", Snackbar.LENGTH_LONG).show()
-		Intent(this,EventsActivity::class.java).also { startActivity(it) }
-	}
-
-	private fun artJobs() {
-		Snackbar.make(homeScreenDrawerLayout, "Jobs section coming soon", Snackbar.LENGTH_LONG)
-			.show()
+		Intent(this, EventsActivity::class.java).also { startActivity(it) }
 	}
 
 	private fun search() {
 		if (firebaseAuth.currentUser!!.isAnonymous) {
 			Snackbar.make(
-				homeScreenDrawerLayout,
+				homeScreenLayout,
 				"Cannot search database when anonymous",
 				Snackbar.LENGTH_LONG
 			).show()

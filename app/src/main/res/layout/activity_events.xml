@@ -13,15 +13,4 @@
 		android:divider="@color/black"
 		android:dividerHeight="2dp"/>
 
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/addEventActionButton"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginRight="12dp"
-		android:layout_marginBottom="12dp"
-		android:src="@drawable/ic_public"
-		android:tooltipText="@string/addEvent"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintRight_toRightOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
